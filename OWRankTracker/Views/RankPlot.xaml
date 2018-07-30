@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="OWRankTracker.Views.RankPlot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OWRankTracker.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:vm="clr-namespace:OWRankTracker.ViewModel"
+             xmlns:vmd="clr-namespace:OWRankTracker.ViewModel.Design"
+             xmlns:xwpf="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance vmd:DesignTimeRankPlotViewModel, IsDesignTimeCreatable=True}">
+    <DockPanel LastChildFill="True">
+        <ItemsControl DockPanel.Dock="Top" DataContext="{Binding Settings, UpdateSourceTrigger=PropertyChanged}" d:DataContext="{x:Type vm:RankPlotSettingViewModel}">
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="FrameworkElement.Margin" Value="5" />
+                    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.Items>
+                From:
+                <xwpf:DateTimePicker 
+                    AutoCloseCalendar="True" 
+                    Value="{Binding StartDateTime, UpdateSourceTrigger=PropertyChanged}" 
+                    Minimum="{Binding MinDateTime, UpdateSourceTrigger=PropertyChanged}"
+                    Maximum="{Binding MaxDateTime, UpdateSourceTrigger=PropertyChanged}"
+                    Format="ShortDate" 
+                    ShowButtonSpinner="False"
+                    ClipValueToMinMax="False">
+                </xwpf:DateTimePicker>
+
+                To:
+                <xwpf:DateTimePicker 
+                    AutoCloseCalendar="True" 
+                    Value="{Binding EndDateTime, UpdateSourceTrigger=PropertyChanged}" 
+                    Minimum="{Binding MinDateTime, UpdateSourceTrigger=PropertyChanged}"
+                    Maximum="{Binding MaxDateTime, UpdateSourceTrigger=PropertyChanged}"
+                    Format="ShortDate" 
+                    ShowButtonSpinner="False"
+                    ClipValueToMinMax="False">
+                </xwpf:DateTimePicker>
+
+                <CheckBox IsChecked="{Binding ShowGameSessions}">Show game sessions?</CheckBox>
+
+            </ItemsControl.Items>
+        </ItemsControl>
+
+        <lvc:CartesianChart 
+            DockPanel.Dock="Bottom"
+            Series="{Binding DataSeries, UpdateSourceTrigger=PropertyChanged}" 
+            LegendLocation="Top" 
+            Zoom="Xy"
+            VerticalAlignment="Stretch"
+            Hoverable="False"
+            DisableAnimations="True"
+        >
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="SR" LabelFormatter="{Binding YFormatter, UpdateSourceTrigger=PropertyChanged}" MinValue="{Binding YAxisStartValue, UpdateSourceTrigger=PropertyChanged}">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="25" />
+                    </lvc:Axis.Separator>
+                    <lvc:Axis.Sections>
+                        <lvc:AxisSection FromValue="0" ToValue="1500" Label="Bronze">
+                            <lvc:AxisSection.Fill>
+                                <SolidColorBrush Color="#cd7f32" Opacity="0.4"/>
+                            </lvc:AxisSection.Fill>
+                        </lvc:AxisSection>
+                        <lvc:AxisSection FromValue="1500" ToValue="200" Label="Silver">
+                            <lvc:AxisSection.Fill>
+                                <SolidColorBrush Color="#c0c0c0" Opacity="0.4"/>
+                            </lvc:AxisSection.Fill>
+                        </lvc:AxisSection>
+                        <lvc:AxisSection FromValue="2000" ToValue="2500" Label="Gold">
+                            <lvc:AxisSection.Fill>
+                                <SolidColorBrush Color="#ffd700" Opacity="0.4"/>
+                            </lvc:AxisSection.Fill>
+                        </lvc:AxisSection>
+                        <lvc:AxisSection FromValue="2500" ToValue="3000" Label="Platinum">
+                            <lvc:AxisSection.Fill>
+                                <SolidColorBrush Color="#e5e4e2" Opacity="0.4"/>
+                            </lvc:AxisSection.Fill>
+                        </lvc:AxisSection>
+                    </lvc:Axis.Sections>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis 
+                    Title="DateTime" 
+                    ShowLabels="False"
+                    Labels="{Binding Labels, UpdateSourceTrigger=PropertyChanged}" 
+                    LabelFormatter="{Binding XFormatter, UpdateSourceTrigger=PropertyChanged}"
+                    Sections="{Binding XAxisSections, UpdateSourceTrigger=PropertyChanged}"
+                />
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+    </DockPanel>
+</UserControl>

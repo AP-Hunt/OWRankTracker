@@ -1,0 +1,111 @@
+﻿<Window x:Class="OWRankTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:OWRankTracker.ViewModel"
+        xmlns:views="clr-namespace:OWRankTracker.Views"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        Height="600"
+        Width="600"
+        Title="Overwatch Rank Tracker"
+        MinWidth="600"
+        MinHeight="600"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type vm:RecordMatchViewModel}">
+                <views:RecordMatchView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:MatchRecordsTableViewModel}">
+                <views:MatchRecordsTable />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:RankPlotViewModel}">
+                <views:RankPlot />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:MapWinRatesViewModel}">
+                <views:MapWinRates />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ProfileSelectViewModel}">
+                <views:ProfileSelect />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Top Left-->
+        <StackPanel        
+            Grid.Column="0"
+            Margin="5, 5, 5, 10"
+            Height="Auto"
+            Width="Auto"
+        >
+            <ContentControl Content="{Binding ProfileSelectViewModel}" />
+            <Line HorizontalAlignment="Stretch" Height="3"/>
+            <ContentControl Content="{Binding RecordMatchViewModel}" />
+        </StackPanel>
+
+        <GridSplitter Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="5" />
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <!-- Top -->
+            <ContentControl 
+                    Grid.Row="0"
+                    Content="{Binding RankPlotViewModel}" 
+                    Margin="5, 5, 5, 10"
+                    Height="Auto"
+                    Width="Auto"
+                />
+            <GridSplitter Grid.Row="0" Grid.Column="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+
+            <!-- Bottom -->
+            <Grid Grid.Row="1"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <ContentControl 
+                        Grid.Column="0"
+                        Content="{Binding MatchRecordsTableViewModel}" 
+                        Margin="5, 10, 5, 5"
+                        Height="Auto"
+                        Width="Auto"
+                    />
+
+                <GridSplitter Grid.Column="0" Width="5" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+
+                <ContentControl 
+                        Grid.Column="1"
+                        Content="{Binding MapWinRatesViewModel}" 
+                        Margin="5, 10, 5, 5"
+                        Height="Auto"
+                        Width="Auto"
+                    />
+            </Grid>
+
+            <GridSplitter Grid.Row="1" Grid.Column="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+        </Grid>
+    </Grid>
+</Window>
