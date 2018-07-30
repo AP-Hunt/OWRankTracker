@@ -9,10 +9,11 @@ assembly_info:
 
 configuration: Release
 before_build:
-    - nuget restore
+        - cmd: nuget restore
 build:
     parallel: true
     project: OWRankTracker.sln
+    verbosity: minimal
 
 artifacts:
     - path: OWRankTracker\bin\$(configuration)
@@ -21,9 +22,8 @@ artifacts:
 deploy:
     - provider:  GitHub
       auth_token:
-          secure: 
-      artifact: OWRankTracker\bin\Release
-      name: compiled_package
+          secure: RM5VRaDPrGHUmXhx2H9fF75MzpjeeCsTiSdDA8geFD3fFWz9JawwezptRY+eeQsX
+      artifact: compiled_package
       on:
           branch: master
           appveyor_repo_tag: true
