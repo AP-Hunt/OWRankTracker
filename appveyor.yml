@@ -25,6 +25,5 @@ deploy:
           secure: RM5VRaDPrGHUmXhx2H9fF75MzpjeeCsTiSdDA8geFD3fFWz9JawwezptRY+eeQsX
       artifact: compiled_package
       on:
-          branch: master
           appveyor_repo_tag: true
 
