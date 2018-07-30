@@ -16,7 +16,6 @@ build:
 
 artifacts:
     - path: OWRankTracker\bin\$(configuration)
-      type: zip
       name: compiled_package
 
 deploy:
