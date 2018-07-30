@@ -1,0 +1,13 @@
+---
+language: csharp
+solution: OWRankTracker.sln
+
+deploy:
+    provider: releases
+    api_key:
+        secure: Vk1ogRUJXCtLl4Y5TEtuig
+    file_glob: true
+    file: OWRankTracker/bin/Release/**/*
+    skip_cleanup: true
+    on:
+        tags: true
