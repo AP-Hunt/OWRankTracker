@@ -3,7 +3,7 @@ using OWRankTracker.Model;
 
 namespace OWRankTracker.Repositories
 {
-    interface IMatchRepository : IEnumerable<MatchRecord>
+    internal interface IMatchRepository : IEnumerable<MatchRecord>
     {
         MatchRecord LastMatch { get; }
 

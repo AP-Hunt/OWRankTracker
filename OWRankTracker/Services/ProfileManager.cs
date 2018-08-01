@@ -11,14 +11,6 @@ namespace OWRankTracker.Services
 {
     class ProfileManager : IProfileManager
     {
-        private static string DEFAULT_PROFILE_NAME = "Default";
-        private static string PROFILE_FOLDER_PATH =
-            Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "OverwatchRankTracker",
-                "Profiles"
-            );
-
         private readonly Storage.IProfileStorage _profileStorage;
         private readonly GalaSoft.MvvmLight.Messaging.IMessenger _messenger;
 
@@ -36,14 +28,14 @@ namespace OWRankTracker.Services
         /// <summary>
         /// Opens the default profile, or if that doesn't exist the first alphabetically
         /// </summary>
-        public void OpenProfileDefaultProfile(bool emitMessage = true)
+        public void OpenDefaultProfile(bool emitMessage = true)
         {
             var allProfiles = this.AllProfiles();
             string profileName = _profileStorage.DefaultProfileName;
 
             if(!_profileStorage.Exists(profileName))
             {
-                profileName = allProfiles.First();
+                profileName = allProfiles.OrderBy(p => p).First();
             }
 
             OpenProfile(profileName, emitMessage);

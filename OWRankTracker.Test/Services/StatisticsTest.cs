@@ -10,14 +10,12 @@ namespace OWRankTracker.Test.Services
     [TestClass]
     public class StatisticsTest
     {
-        private FixtureFactories.MatchRecordFactory _matchRecordFactory = new FixtureFactories.MatchRecordFactory();
-        
         [TestMethod]
         public void GameSessions_FindsGameSessionClusters_AcrossDifferentDays()
         {
             // Arrange
-            var clusterOne = _matchRecordFactory.NMatchesBetweenDates(7, new DateTime(2018, 01, 01, 21, 25, 00));
-            var clusterTwo = _matchRecordFactory.NMatchesBetweenDates(12, new DateTime(2018, 01, 02, 18, 00, 00));
+            var clusterOne = Fakers.MatchRecordFaker.NMatchesBetweenDates(7, new DateTime(2018, 01, 01, 21, 25, 00));
+            var clusterTwo = Fakers.MatchRecordFaker.NMatchesBetweenDates(12, new DateTime(2018, 01, 02, 18, 00, 00));
 
             List<MatchRecord> matches = new List<MatchRecord>();
             matches.AddRange(clusterOne);

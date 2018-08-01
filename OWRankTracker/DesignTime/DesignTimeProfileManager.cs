@@ -22,7 +22,7 @@ namespace OWRankTracker.DesignTime
 
         public DesignTimeProfileManager()
         {
-            OpenProfileDefaultProfile(false);
+            OpenDefaultProfile(false);
         }
 
         public IEnumerable<string> AllProfiles()
@@ -41,7 +41,7 @@ namespace OWRankTracker.DesignTime
             ActiveProfileName = name;
         }
 
-        public void OpenProfileDefaultProfile(bool emitMessage = true)
+        public void OpenDefaultProfile(bool emitMessage = true)
         {
             OpenProfile(_profiles.Keys.First(), emitMessage);
         }

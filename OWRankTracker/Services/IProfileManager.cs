@@ -10,6 +10,6 @@ namespace OWRankTracker.Services
 
         IEnumerable<string> AllProfiles();
         void OpenProfile(string name, bool emitMessage = true);
-        void OpenProfileDefaultProfile(bool emitMessage = true);
+        void OpenDefaultProfile(bool emitMessage = true);
     }
 }

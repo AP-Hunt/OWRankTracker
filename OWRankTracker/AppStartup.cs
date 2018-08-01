@@ -17,7 +17,7 @@ namespace OWRankTracker
             ViewModel.ViewModelLocator locator = new ViewModel.ViewModelLocator();
             
             IProfileManager profileManager = ServiceLocator.Current.GetInstance<IProfileManager>();
-            profileManager.OpenProfileDefaultProfile(emitMessage: false);
+            profileManager.OpenDefaultProfile(emitMessage: false);
         }
     }
 }

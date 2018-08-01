@@ -55,3 +55,4 @@ using System.Windows;
 [assembly: AssemblyFileVersion("0.0.0.1")]
 
 [assembly: InternalsVisibleTo("OWRankTracker.Test", AllInternalsVisible = true)]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

@@ -11,14 +11,12 @@ namespace OWRankTracker.Test.Model
     [TestClass]
     public class GameSessionTest
     {
-        private FixtureFactories.MatchRecordFactory _recordFactory = new FixtureFactories.MatchRecordFactory();
-
         [TestMethod]
         public void CRChange_CalculatesTheDifferenceBetweenTheInitialCR_AndTheFinalMatchCR()
         {
             // Arrange
             var initialCr = 1945;
-            IEnumerable<MatchRecord> matches = _recordFactory.NMatchesBetweenDates(
+            IEnumerable<MatchRecord> matches = Fakers.MatchRecordFaker.NMatchesBetweenDates(
                 10,
                 start: new DateTime(2018, 01, 01, 21, 00, 00),
                 initialCR: initialCr

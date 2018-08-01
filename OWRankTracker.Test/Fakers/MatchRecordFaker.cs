@@ -6,11 +6,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OWRankTracker.Test.FixtureFactories
+namespace OWRankTracker.Test.Fakers
 {
-    class MatchRecordFactory
+    class MatchRecordFaker
     {
-        public IEnumerable<MatchRecord> NMatchesBetweenDates(
+        /// <summary>
+        /// Creates fake match records. Use named arguments to override any field.
+        /// </summary>
+        /// <param name="cr"></param>
+        /// <param name="diff"></param>
+        /// <param name="map"></param>
+        /// <param name="result"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static MatchRecord CreateRecord(
+            int cr = 1000, 
+            int diff = 0, 
+            string map = null, 
+            MatchResult result = MatchResult.WIN, 
+            DateTime? date = null
+        ){
+            var valueFaker = new Faker();
+
+            return new MatchRecord()
+            {
+                CR = cr,
+                Date = date ?? DateTime.Now,
+                Diff = diff,
+                Map = map ?? MapFaker.Random(),
+                Result = result
+            };
+        }
+
+        public static IEnumerable<MatchRecord> NMatchesBetweenDates(
             int n,
             DateTime start,
             int initialCR = 1000,
@@ -28,7 +56,7 @@ namespace OWRankTracker.Test.FixtureFactories
                 CR = firstCR,
                 Date = orderedDates.ElementAt(i),
                 Diff = firstCR - initialCR,
-                Map = valueFaker.Random.ArrayElement(Maps.All),
+                Map = MapFaker.Random(),
                 Result = MatchRecord.ComparerCR(firstCR, initialCR)
             };
             matches.Add(firstMatch);
@@ -41,7 +69,7 @@ namespace OWRankTracker.Test.FixtureFactories
                 var newMatch = lastMatch.NewRelativeRecord(
                     valueFaker.Random.Number(initialCR - crMaxDifference, initialCR + crMaxDifference),
                     orderedDates.ElementAt(i),
-                    valueFaker.Random.ArrayElement(Maps.All)
+                    MapFaker.Random()
                 );
                 matches.Add(newMatch);
                 i++;
@@ -57,7 +85,7 @@ namespace OWRankTracker.Test.FixtureFactories
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        private IEnumerable<DateTime> GenerateRealisticMatchTimes(int n, DateTime start)
+        private static IEnumerable<DateTime> GenerateRealisticMatchTimes(int n, DateTime start)
         {
             int minLengthMins = 10;
             int maxLengthMins = 45;
