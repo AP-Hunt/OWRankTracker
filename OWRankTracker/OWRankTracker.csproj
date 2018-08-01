@@ -63,24 +63,6 @@
     <Reference Include="MoreLinq, Version=3.0.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.3.0.0-beta-2\lib\net451\MoreLinq.dll</HintPath>
     </Reference>
-    <Reference Include="Overlay.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Overlay.NET.1.0.2\lib\Overlay.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="Process.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Overlay.NET.1.0.2\lib\Process.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX, Version=3.1.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Overlay.NET.1.0.2\lib\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct2D1, Version=3.1.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Overlay.NET.1.0.2\lib\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DXGI, Version=3.1.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Overlay.NET.1.0.2\lib\SharpDX.DXGI.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Mathematics, Version=3.1.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Overlay.NET.1.0.2\lib\SharpDX.Mathematics.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -143,15 +125,6 @@
     <Compile Include="Model\MatchRecord.cs" />
     <Compile Include="Model\MatchRecordCollectionExtensions.cs" />
     <Compile Include="Model\MatchResult.cs" />
-    <Compile Include="Overlay\OverlayCoordinator.cs" />
-    <Compile Include="Overlay\Overlay.cs" />
-    <Compile Include="Overlay\OverlayHostWindow.xaml.cs">
-      <DependentUpon>OverlayHostWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Overlay\RecordMatchOverlayCoordinator.cs" />
-    <Compile Include="Overlay\TickEngine.cs" />
-    <Compile Include="Overlay\WaitTimer.cs" />
-    <Compile Include="Overlay\WindowHelper.cs" />
     <Compile Include="Repositories\IMatchRepository.cs" />
     <Compile Include="Repositories\InMemoryMatchRepository.cs" />
     <Compile Include="Repositories\MatchRepository.cs" />
@@ -198,10 +171,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Overlay\OverlayHostWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Skins\MainSkin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

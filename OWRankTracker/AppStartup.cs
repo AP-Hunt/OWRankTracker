@@ -18,10 +18,6 @@ namespace OWRankTracker
             
             IProfileManager profileManager = ServiceLocator.Current.GetInstance<IProfileManager>();
             profileManager.OpenProfileDefaultProfile(emitMessage: false);
-
-            //Overlay.Overlay.Startup();
-            //App app = (App)Application.Current;
-            //app.OverlayCoordinator = Overlay.Overlay.Coordinator;
         }
     }
 }

@@ -10,8 +10,6 @@ namespace OWRankTracker
     /// </summary>
     public partial class App : Application
     {
-        internal Overlay.OverlayCoordinator OverlayCoordinator { get; set; }
-
         static App()
         {
             // Ensure the current culture passed into bindings is the OS culture.
