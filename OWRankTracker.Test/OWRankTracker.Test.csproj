@@ -82,13 +82,16 @@
   <ItemGroup>
     <Compile Include="Fakers\MapFaker.cs" />
     <Compile Include="Fakers\MatchRecordFaker.cs" />
+    <Compile Include="Fakers\ProfileManagerFaker.cs" />
     <Compile Include="Model\GameSessionTest.cs" />
     <Compile Include="Model\MatchRecordCollectionExtensionTest.cs" />
     <Compile Include="Model\MatchRecordTest.cs" />
+    <Compile Include="Model\MapStatisticsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FakeProfileStorage.cs" />
     <Compile Include="Services\ProfileManagerTest.cs" />
     <Compile Include="Services\StatisticsTest.cs" />
+    <Compile Include="ViewModel\MapWinRatesViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
