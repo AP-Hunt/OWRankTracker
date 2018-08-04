@@ -117,6 +117,7 @@
     <Compile Include="AppStartup.cs" />
     <Compile Include="CSV\MatchResultTypeConverter.cs" />
     <Compile Include="CSV\MatchRecordConfiguration.cs" />
+    <Compile Include="ViewModel\Design\DesignTimeMainViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeProfileManager.cs" />
     <Compile Include="DesignTime\Profiles\FiveHundredMatches.cs" />
     <Compile Include="DesignTime\Profiles\Empty.cs" />
