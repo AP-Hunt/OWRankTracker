@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OWRankTracker.Model;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 
 namespace OWRankTracker.Services.Storage
 {
@@ -36,7 +36,7 @@ namespace OWRankTracker.Services.Storage
             EnsureDefaultProfileExists();
         }
 
-        public IMatchRepository Create(string profileName)
+        public IMatchHistory Create(string profileName)
         {
             string profile = ProfilePath(profileName);
             StreamWriter writer = new StreamWriter(profile);
@@ -50,7 +50,7 @@ namespace OWRankTracker.Services.Storage
                 csvWriter.NextRecord();
             }
 
-            return new MatchRepository(profile);
+            return new MatchHistory.FileSystemMatchHistory(profile);
         }
 
         public bool Exists(string profileName)
@@ -58,9 +58,9 @@ namespace OWRankTracker.Services.Storage
             return File.Exists(ProfilePath(profileName));
         }
 
-        public IMatchRepository Get(string profileName)
+        public IMatchHistory Get(string profileName)
         {
-            return new Repositories.MatchRepository(ProfilePath(profileName));
+            return new MatchHistory.FileSystemMatchHistory(ProfilePath(profileName));
         }
 
         private string ProfilePath(string name)

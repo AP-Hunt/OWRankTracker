@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,7 +94,7 @@ namespace OWRankTracker.ViewModel
             }
         }
 
-        public void ChangeProfile(IMatchRepository profile)
+        public void ChangeProfile(IMatchHistory profile)
         {
             _isProfileChanging = true;
 

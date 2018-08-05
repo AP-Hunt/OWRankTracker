@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 
 namespace OWRankTracker.Services.Storage
 {
     class InMemoryProfileStorage : IProfileStorage
     {
-        private Dictionary<string, IMatchRepository> _profiles;
+        private Dictionary<string, IMatchHistory> _profiles;
 
         public string DefaultProfileName => "Default";
 
@@ -17,17 +17,17 @@ namespace OWRankTracker.Services.Storage
 
         public InMemoryProfileStorage()
         {
-            _profiles = new Dictionary<string, IMatchRepository>();
+            _profiles = new Dictionary<string, IMatchHistory>();
         }
 
-        public InMemoryProfileStorage(Dictionary<string, IMatchRepository> profiles)
+        public InMemoryProfileStorage(Dictionary<string, IMatchHistory> profiles)
         {
             _profiles = profiles;
         }
 
-        public IMatchRepository Create(string profileName)
+        public IMatchHistory Create(string profileName)
         {
-            var repo = new InMemoryMatchRepository();
+            var repo = new InMemoryMatchHistory();
             _profiles.Add(profileName, repo);
             return repo;
         }
@@ -37,7 +37,7 @@ namespace OWRankTracker.Services.Storage
             return _profiles.ContainsKey(profileName);
         }
 
-        public IMatchRepository Get(string profileName)
+        public IMatchHistory Get(string profileName)
         {
             return _profiles[profileName];
         }

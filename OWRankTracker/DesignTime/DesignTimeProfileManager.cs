@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 
 namespace OWRankTracker.DesignTime
 {
     class DesignTimeProfileManager : Services.IProfileManager
     {
-        private Dictionary<string, IMatchRepository> _profiles = new Dictionary<string, IMatchRepository>()
+        private Dictionary<string, IMatchHistory> _profiles = new Dictionary<string, IMatchHistory>()
         {
             { "Winner", new Profiles.Winner() },
             { "Loser", new Profiles.Loser() },
@@ -17,7 +17,7 @@ namespace OWRankTracker.DesignTime
         };
 
 
-        public IMatchRepository ActiveProfile { get; private set; }
+        public IMatchHistory ActiveProfile { get; private set; }
         public string ActiveProfileName { get; private set; }
 
         public DesignTimeProfileManager()

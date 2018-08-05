@@ -30,7 +30,7 @@ namespace OWRankTracker.ViewModel
         {
             Services.Storage.IProfileStorage profileStorage;
 #if DEBUG
-            profileStorage =  new Services.Storage.InMemoryProfileStorage(new Dictionary<string, Repositories.IMatchRepository>()
+            profileStorage =  new Services.Storage.InMemoryProfileStorage(new Dictionary<string, MatchHistory.IMatchHistory>()
                 {   
                     { "Default", new DesignTime.Profiles.Empty() },
                     { "Loser", new DesignTime.Profiles.Loser() },

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 
 namespace OWRankTracker.Services
 {
     interface IProfileManager
     {
-        IMatchRepository ActiveProfile { get; }
+        IMatchHistory ActiveProfile { get; }
         string ActiveProfileName { get; }
 
         IEnumerable<string> AllProfiles();

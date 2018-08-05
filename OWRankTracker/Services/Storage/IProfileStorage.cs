@@ -1,4 +1,4 @@
-﻿using OWRankTracker.Repositories;
+﻿using OWRankTracker.MatchHistory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace OWRankTracker.Services.Storage
         IEnumerable<string> AllProfileNames { get; }
 
         bool Exists(string profileName);
-        IMatchRepository Get(string profileName);
-        IMatchRepository Create(string profileName);
+        IMatchHistory Get(string profileName);
+        IMatchHistory Create(string profileName);
     }
 }

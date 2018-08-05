@@ -132,9 +132,9 @@
     <Compile Include="Model\MatchRecord.cs" />
     <Compile Include="Model\MatchRecordCollectionExtensions.cs" />
     <Compile Include="Model\MatchResult.cs" />
-    <Compile Include="Repositories\IMatchRepository.cs" />
-    <Compile Include="Repositories\InMemoryMatchRepository.cs" />
-    <Compile Include="Repositories\MatchRepository.cs" />
+    <Compile Include="MatchHistory\IMatchHistory.cs" />
+    <Compile Include="MatchHistory\InMemoryMatchHistory.cs" />
+    <Compile Include="MatchHistory\FileSystemMatchHistory.cs" />
     <Compile Include="Services\IProfileManager.cs" />
     <Compile Include="Services\ProfileManager.cs" />
     <Compile Include="Services\Statistics.cs" />

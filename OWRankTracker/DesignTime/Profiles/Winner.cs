@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OWRankTracker.Model;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 
 namespace OWRankTracker.DesignTime.Profiles
 {
-    class Winner : InMemoryMatchRepository
+    class Winner : InMemoryMatchHistory
     {
         public Winner() : base(GetRecords())
         {

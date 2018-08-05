@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using OWRankTracker.Messages;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 using OWRankTracker.Services;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace OWRankTracker.ViewModel
 {
     class MatchDataViewModelBase : ViewModelBase
     {
-        protected IMatchRepository MatchRepository { get; set; }
+        protected IMatchHistory MatchRepository { get; set; }
         public string ProfileName { get; private set; }
 
         public MatchDataViewModelBase(IProfileManager profileManager)
@@ -30,7 +30,7 @@ namespace OWRankTracker.ViewModel
 
         private void OnActiveProfileChanged(ActiveProfileChanged message)
         {
-            MatchRepository = message.MatchRepository;
+            MatchRepository = message.MatchHistory;
             ProfileName = message.ProfileName;
             ActiveProfileChanged();
         }

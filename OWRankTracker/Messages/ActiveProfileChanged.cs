@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 
 namespace OWRankTracker.Messages
 {
     class ActiveProfileChanged
     {
         public string ProfileName { get; }
-        public IMatchRepository MatchRepository { get; private set; }
+        public IMatchHistory MatchHistory { get; private set; }
 
-        public ActiveProfileChanged(string profileName, IMatchRepository profileDataRepository)
+        public ActiveProfileChanged(string profileName, IMatchHistory profileMatchHistory)
         {
             ProfileName = profileName;
-            MatchRepository = profileDataRepository;
+            MatchHistory = profileMatchHistory;
         }
     }
 }

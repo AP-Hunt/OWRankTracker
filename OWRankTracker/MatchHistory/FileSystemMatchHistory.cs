@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using OWRankTracker.Model;
 
-namespace OWRankTracker.Repositories
+namespace OWRankTracker.MatchHistory
 {
-    class MatchRepository : IMatchRepository
+    class FileSystemMatchHistory : IMatchHistory
     {
         private string _csvPath;
 
@@ -32,7 +32,7 @@ namespace OWRankTracker.Repositories
 
         public MatchRecord LastMatch => Records.LastOrDefault();
 
-        public MatchRepository(string filePath)
+        public FileSystemMatchHistory(string filePath)
         {
             _csvPath = filePath;
         }

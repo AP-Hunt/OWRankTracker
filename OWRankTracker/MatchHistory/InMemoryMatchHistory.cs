@@ -6,23 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OWRankTracker.Repositories
+namespace OWRankTracker.MatchHistory
 {
-    class InMemoryMatchRepository : IMatchRepository
+    class InMemoryMatchHistory : IMatchHistory
     {
         private List<Model.MatchRecord> _records;
 
-        public InMemoryMatchRepository()
+        public InMemoryMatchHistory()
         {
             _records = new List<Model.MatchRecord>();
         }
 
-        public InMemoryMatchRepository(IEnumerable<Model.MatchRecord> records)
+        public InMemoryMatchHistory(IEnumerable<Model.MatchRecord> records)
         {
             _records = records.ToList();
         }
 
-        public MatchRecord LastMatch => _records.Last();
+        public MatchRecord LastMatch => _records.LastOrDefault();
 
         public void Add(MatchRecord record)
         {

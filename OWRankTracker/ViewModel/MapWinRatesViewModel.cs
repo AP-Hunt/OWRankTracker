@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using OWRankTracker.Messages;
 using OWRankTracker.Model;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 using OWRankTracker.Services;
 using System;
 using System.Collections.Generic;

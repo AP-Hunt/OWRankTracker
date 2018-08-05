@@ -19,7 +19,7 @@ namespace OWRankTracker.Services
 
         public IEnumerable<GameSession> FindGameSessions()
         {
-            if(!_records.Any())
+            if(_records.Count() < 2)
             {
                 return Enumerable.Empty<GameSession>();
             }

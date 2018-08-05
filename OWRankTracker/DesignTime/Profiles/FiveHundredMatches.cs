@@ -1,5 +1,5 @@
 ﻿using OWRankTracker.Model;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OWRankTracker.DesignTime.Profiles
 {
-    class FiveHundredMatches : InMemoryMatchRepository
+    class FiveHundredMatches : InMemoryMatchHistory
     {
         public FiveHundredMatches() : base(GetRecords())
         {

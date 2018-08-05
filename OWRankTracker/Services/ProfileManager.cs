@@ -22,7 +22,7 @@ namespace OWRankTracker.Services
         private readonly Storage.IProfileStorage _profileStorage;
         private readonly GalaSoft.MvvmLight.Messaging.IMessenger _messenger;
 
-        public Repositories.IMatchRepository ActiveProfile { get; private set; }
+        public MatchHistory.IMatchHistory ActiveProfile { get; private set; }
         public string ActiveProfileName { get; private set; }
 
         public ProfileManager(
