@@ -13,6 +13,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using OWRankTracker.Model;
+using OWRankTracker.Profile;
 using System.Collections.Generic;
 
 namespace OWRankTracker.ViewModel
@@ -30,12 +31,12 @@ namespace OWRankTracker.ViewModel
         {
             Services.Storage.IProfileStorage profileStorage;
 #if DEBUG
-            profileStorage =  new Services.Storage.InMemoryProfileStorage(new Dictionary<string, Repositories.IMatchRepository>()
+            profileStorage =  new Services.Storage.InMemoryProfileStorage(new List<IProfile>()
                 {   
-                    { "Default", new DesignTime.Profiles.Empty() },
-                    { "Loser", new DesignTime.Profiles.Loser() },
-                    { "Winner", new DesignTime.Profiles.Winner() },
-                    { "500 Matches", new DesignTime.Profiles.FiveHundredMatches() }
+                    new DesignTime.Profiles.Empty("Default"),
+                    new DesignTime.Profiles.Loser(),
+                    new DesignTime.Profiles.Winner(),
+                    new DesignTime.Profiles.FiveHundredMatches()
                 });       
 #else
             profileStorage = new Services.Storage.FileSystemProfileStorage();

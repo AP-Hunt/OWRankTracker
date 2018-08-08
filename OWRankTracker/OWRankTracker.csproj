@@ -70,6 +70,9 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Abstractions, Version=2.1.0.215, Culture=neutral, PublicKeyToken=96bf224d23c43e59, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.2.1.0.215\lib\net40\System.IO.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
@@ -117,6 +120,9 @@
     <Compile Include="AppStartup.cs" />
     <Compile Include="CSV\MatchResultTypeConverter.cs" />
     <Compile Include="CSV\MatchRecordConfiguration.cs" />
+    <Compile Include="Profile\IProfile.cs" />
+    <Compile Include="Services\ProfileNameConflictException.cs" />
+    <Compile Include="ViewModel\Design\DesignTimeMainViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeProfileManager.cs" />
     <Compile Include="DesignTime\Profiles\FiveHundredMatches.cs" />
     <Compile Include="DesignTime\Profiles\Empty.cs" />
@@ -131,9 +137,9 @@
     <Compile Include="Model\MatchRecord.cs" />
     <Compile Include="Model\MatchRecordCollectionExtensions.cs" />
     <Compile Include="Model\MatchResult.cs" />
-    <Compile Include="Repositories\IMatchRepository.cs" />
-    <Compile Include="Repositories\InMemoryMatchRepository.cs" />
-    <Compile Include="Repositories\MatchRepository.cs" />
+    <Compile Include="MatchHistory\IMatchHistory.cs" />
+    <Compile Include="MatchHistory\InMemoryMatchHistory.cs" />
+    <Compile Include="MatchHistory\FileSystemMatchHistory.cs" />
     <Compile Include="Services\IProfileManager.cs" />
     <Compile Include="Services\ProfileManager.cs" />
     <Compile Include="Services\Statistics.cs" />

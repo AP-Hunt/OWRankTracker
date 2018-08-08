@@ -4,6 +4,7 @@ using System.Linq;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OWRankTracker.Model;
+using OWRankTracker.Profile;
 using OWRankTracker.Services;
 using OWRankTracker.Test.Fakers;
 using OWRankTracker.ViewModel;
@@ -15,22 +16,18 @@ namespace OWRankTracker.Test.ViewModel
     {
         private IProfileManager _profileManager;
         private IMessenger _messenger;
-        private List<MatchRecord> _records;
+        private Fixtures.DefaultProfile _defaultProfile;
+        private Fixtures.OtherProfile _alternateProfile;
 
         [TestInitialize]
         public void Setup()
         {
-            _records = new List<MatchRecord>()
-            {
-                MatchRecordFaker.CreateRecord(result: MatchResult.WIN, map: Maps.All.ElementAt(1)),
-                MatchRecordFaker.CreateRecord(result: MatchResult.WIN, map: Maps.All.ElementAt(1)),
-                MatchRecordFaker.CreateRecord(result: MatchResult.LOSE, map: Maps.All.ElementAt(2)),
-                MatchRecordFaker.CreateRecord(result: MatchResult.LOSE, map: Maps.All.ElementAt(3)),
-                MatchRecordFaker.CreateRecord(result: MatchResult.DRAW, map: "N/A"),
-            };
-
+            _defaultProfile = new Fixtures.DefaultProfile();
+            _alternateProfile = new Fixtures.OtherProfile();
             _messenger = Messenger.Default;
-            _profileManager = ProfileManagerFaker.CreateSimpleManager(_records, _messenger);
+
+            var profiles = new List<IProfile>() { _defaultProfile, _alternateProfile };
+            _profileManager = ProfileManagerFaker.CreateSimpleManager(profiles, _messenger);
         }
 
         [TestMethod]
@@ -43,7 +40,7 @@ namespace OWRankTracker.Test.ViewModel
             int actual = vm.TotalPlayed;
 
             // Assert
-            Assert.AreEqual(_records.Count, actual);
+            Assert.AreEqual(_defaultProfile.MatchHistory.Count(), actual);
         }
 
         [TestMethod]
@@ -95,7 +92,7 @@ namespace OWRankTracker.Test.ViewModel
             int actual = vm.TotalWithMaps;
 
             // Assert
-            Assert.AreEqual(_records.Count - 1, actual);
+            Assert.AreEqual(_defaultProfile.MatchHistory.Count() - 1, actual);
         }
 
         [TestMethod]
@@ -127,7 +124,7 @@ namespace OWRankTracker.Test.ViewModel
             NewMatchRecord(newRecord);
 
             // Assert
-            Assert.AreEqual(_records.Count() + 1, vm.TotalPlayed);
+            Assert.AreEqual(_profileManager.ActiveProfile.MatchHistory.Count(), vm.TotalPlayed);
         }
 
         [TestMethod]
@@ -177,7 +174,7 @@ namespace OWRankTracker.Test.ViewModel
 
         private void NewMatchRecord(MatchRecord record)
         {
-            _profileManager.ActiveProfile.Add(record);
+            _profileManager.ActiveProfile.MatchHistory.Add(record);
             _messenger.Send(new Messages.NewMatchRecord(record));
         }
     }

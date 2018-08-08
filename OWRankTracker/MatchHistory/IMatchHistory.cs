@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using OWRankTracker.Model;
 
-namespace OWRankTracker.Repositories
+namespace OWRankTracker.MatchHistory
 {
-    internal interface IMatchRepository : IEnumerable<MatchRecord>
+    internal interface IMatchHistory : IEnumerable<MatchRecord>
     {
         MatchRecord LastMatch { get; }
 

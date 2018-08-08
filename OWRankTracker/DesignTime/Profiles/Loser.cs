@@ -1,17 +1,23 @@
 ﻿using OWRankTracker.Model;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OWRankTracker.Profile;
 
 namespace OWRankTracker.DesignTime.Profiles
 {
-    class Loser : InMemoryMatchRepository
+    class Loser : IProfile
     {
-        public Loser() : base(GetRecords())
+        public string Name { get; private set; }
+        public IMatchHistory MatchHistory { get; private set; }
+
+        public Loser()
         {
+            Name = "Loser";
+            MatchHistory = new InMemoryMatchHistory(GetRecords());
         }
 
         private static IEnumerable<MatchRecord> GetRecords()

@@ -4,12 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OWRankTracker.Model;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
+using OWRankTracker.Profile;
 
 namespace OWRankTracker.DesignTime.Profiles
 {
-    class Empty : InMemoryMatchRepository
+    class Empty : IProfile
     {
-        // No-op
+        public string Name { get; private set; }
+        public IMatchHistory MatchHistory { get; private set; }
+
+        public Empty(string name)
+        {
+            Name = name;
+            MatchHistory = new InMemoryMatchHistory();
+        }
     }
 }

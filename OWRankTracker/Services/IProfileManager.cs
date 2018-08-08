@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using OWRankTracker.Repositories;
+using OWRankTracker.MatchHistory;
+using OWRankTracker.Profile;
 
 namespace OWRankTracker.Services
 {
     interface IProfileManager
     {
-        IMatchRepository ActiveProfile { get; }
-        string ActiveProfileName { get; }
+        IEnumerable<IProfile> Profiles { get; }
+        IProfile ActiveProfile { get; }
 
-        IEnumerable<string> AllProfiles();
         void OpenProfile(string name, bool emitMessage = true);
         void OpenDefaultProfile(bool emitMessage = true);
     }

@@ -1,4 +1,5 @@
 ﻿using OWRankTracker.Model;
+using OWRankTracker.Profile;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,11 +12,13 @@ namespace OWRankTracker.Services
 {
     class ProfileManager : IProfileManager
     {
+        private static string DEFAULT_PROFILE_NAME = "Default";
         private readonly Storage.IProfileStorage _profileStorage;
         private readonly GalaSoft.MvvmLight.Messaging.IMessenger _messenger;
 
-        public Repositories.IMatchRepository ActiveProfile { get; private set; }
-        public string ActiveProfileName { get; private set; }
+        public IProfile ActiveProfile { get; private set; }
+
+        public IEnumerable<IProfile> Profiles => _profileStorage;
 
         public ProfileManager(
             Storage.IProfileStorage profileStorage,
@@ -23,6 +26,9 @@ namespace OWRankTracker.Services
         ){
             _profileStorage = profileStorage;
             _messenger = messenger;
+
+            EnsureDefaultProfileExistsIfNeeded();
+            OpenInitialProfile();
         }
 
         /// <summary>
@@ -30,12 +36,11 @@ namespace OWRankTracker.Services
         /// </summary>
         public void OpenDefaultProfile(bool emitMessage = true)
         {
-            var allProfiles = this.AllProfiles();
-            string profileName = _profileStorage.DefaultProfileName;
+            string profileName = DEFAULT_PROFILE_NAME;
 
             if(!_profileStorage.Exists(profileName))
             {
-                profileName = allProfiles.OrderBy(p => p).First();
+                profileName = _profileStorage.First().Name;
             }
 
             OpenProfile(profileName, emitMessage);
@@ -43,24 +48,31 @@ namespace OWRankTracker.Services
 
         public void OpenProfile(string name, bool emitMessage = true)
         {
-            if(!_profileStorage.Exists(name))
+            if (!_profileStorage.Exists(name))
             {
                 throw new ArgumentException($"{name} is not a valid profile name", nameof(name));
             }
 
-            var repo = _profileStorage.Get(name);
-            ActiveProfile = repo;
-            ActiveProfileName = name;
+            IProfile profile = _profileStorage.Get(name);
+            ActiveProfile = profile;
 
             if (emitMessage)
             {
-                _messenger.Send<Messages.ActiveProfileChanged>(new Messages.ActiveProfileChanged(name, repo));
+                _messenger.Send<Messages.ActiveProfileChanged>(new Messages.ActiveProfileChanged(profile));
             }
         }
 
-        public IEnumerable<string> AllProfiles()
+        private void EnsureDefaultProfileExistsIfNeeded()
         {
-            return _profileStorage.AllProfileNames;
+            if(_profileStorage.Count() == 0)
+            {
+                _profileStorage.Create(DEFAULT_PROFILE_NAME);
+            }
+        }
+
+        private void OpenInitialProfile()
+        {
+            OpenProfile(_profileStorage.First().Name);
         }
     }
 }

@@ -87,7 +87,7 @@ namespace OWRankTracker.ViewModel
 
         public RankPlotViewModel(IProfileManager profileManager) : base(profileManager)
         {
-            Settings = new RankPlotSettingViewModel(MatchRepository.FirstOrDefault()?.Date ?? DateTime.Today, MatchRepository.LastOrDefault()?.Date ?? DateTime.Today);
+            Settings = new RankPlotSettingViewModel(MatchHistory.FirstOrDefault()?.Date ?? DateTime.Today, MatchHistory.LastOrDefault()?.Date ?? DateTime.Today);
             GeneratePlot();
             MessengerInstance.Register<Messages.NewMatchRecord>(this, OnNewRecord);
             MessengerInstance.Register<Messages.PlotDateRangeChanged>(this, OnPlotDateRangeChange);
@@ -103,7 +103,7 @@ namespace OWRankTracker.ViewModel
 
         private void OnNewRecord(NewMatchRecord message)
         {
-            Settings.ExtendDateRangeEnding(MatchRepository.Last().Date);
+            Settings.ExtendDateRangeEnding(MatchHistory.Last().Date);
             AddRecordToPlot(message.Record);
         }
 
@@ -117,13 +117,13 @@ namespace OWRankTracker.ViewModel
 
         protected override void ActiveProfileChanged()
         {
-            Settings.ChangeProfile(MatchRepository);
+            Settings.ChangeProfile(MatchHistory);
             GeneratePlot();
         }
 
         private void GeneratePlot()
         {
-            var matchesInDateRange = MatchRepository.Where(m => Between(m, Settings.StartDateTime, Settings.EndDateTime));
+            var matchesInDateRange = MatchHistory.Where(m => Between(m, Settings.StartDateTime, Settings.EndDateTime));
 
             var lineSeries = new LineSeries
             {
@@ -147,7 +147,7 @@ namespace OWRankTracker.ViewModel
                 .Stroke(ShouldBeWeekendColoured(weekendBrush));
 
             var xLabels =
-                from r in MatchRepository
+                from r in MatchHistory
                 select r.Date.ToString("G");
 
 
@@ -192,17 +192,17 @@ namespace OWRankTracker.ViewModel
         {
             return (item, index) =>
             {
-                if (index > MatchRepository.Count() - 1)
+                if (index > MatchHistory.Count() - 1)
                 {
                     return null;
                 }
-                return IsWeekendDay(MatchRepository.ElementAt(index).Date) ? weekendBrush : null;
+                return IsWeekendDay(MatchHistory.ElementAt(index).Date) ? weekendBrush : null;
             };
         }
 
         private SectionsCollection CreateXAxisSections()
         {
-            var stats = new Statistics(MatchRepository);
+            var stats = new Statistics(MatchHistory);
             var sessions = stats.FindGameSessions();
 
             SectionsCollection sections = new SectionsCollection();

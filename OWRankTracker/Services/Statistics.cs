@@ -19,7 +19,7 @@ namespace OWRankTracker.Services
 
         public IEnumerable<GameSession> FindGameSessions()
         {
-            if(!_records.Any())
+            if(_records.Count() < 2)
             {
                 return Enumerable.Empty<GameSession>();
             }
@@ -28,6 +28,11 @@ namespace OWRankTracker.Services
                 (int)_records
                     .Pairwise((a, b) => Timestamp(b.Date) - Timestamp(a.Date))
                     .Average();
+
+            if(averageDistance < 0)
+            {
+                return Enumerable.Empty<GameSession>();
+            }
 
             List<GameSession> sessions = new List<GameSession>();
             int lastTimestamp = Timestamp(_records.First().Date);

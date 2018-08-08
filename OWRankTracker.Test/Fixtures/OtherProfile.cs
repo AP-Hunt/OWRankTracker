@@ -1,25 +1,20 @@
-﻿using OWRankTracker.Model;
-using OWRankTracker.Repositories;
+﻿using OWRankTracker.MatchHistory;
+using OWRankTracker.Model;
+using OWRankTracker.Profile;
 using OWRankTracker.Test.Fakers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OWRankTracker.Test.Fixtures
 {
-    class AlternateProfile : InMemoryMatchRepository
+    class OtherProfile : IProfile
     {
-        public static readonly string ProfileName = "Alternate";
+        public string Name => "Other";
+        public IMatchHistory MatchHistory { get; private set; }
 
-        public static readonly int Wins = 1;
-        public static readonly int Draws = 2;
-        public static readonly int Losses = 4;
-
-        public AlternateProfile()
-        : base(
-            new List<MatchRecord>()
+        public OtherProfile()
+        {
+            MatchHistory = new InMemoryMatchHistory(new List<MatchRecord>()
             {
                 MatchRecordFaker.CreateRecord(result: MatchResult.LOSE, map: Maps.All.ElementAt(1)),
                 MatchRecordFaker.CreateRecord(result: MatchResult.LOSE, map: Maps.All.ElementAt(1)),
@@ -28,9 +23,7 @@ namespace OWRankTracker.Test.Fixtures
                 MatchRecordFaker.CreateRecord(result: MatchResult.WIN, map: "N/A"),
                 MatchRecordFaker.CreateRecord(result: MatchResult.DRAW, map: "N/A"),
                 MatchRecordFaker.CreateRecord(result: MatchResult.DRAW, map: Maps.All.ElementAt(4)),
-            }
-        )
-        {
+            });
         }
     }
 }

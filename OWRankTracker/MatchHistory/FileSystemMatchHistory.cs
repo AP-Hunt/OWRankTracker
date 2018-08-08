@@ -2,15 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OWRankTracker.Model;
 
-namespace OWRankTracker.Repositories
+namespace OWRankTracker.MatchHistory
 {
-    class MatchRepository : IMatchRepository
+    class FileSystemMatchHistory : IMatchHistory
     {
+        private readonly IFileSystem _fileSystem;
         private string _csvPath;
 
         private List<MatchRecord> _records;
@@ -32,8 +34,9 @@ namespace OWRankTracker.Repositories
 
         public MatchRecord LastMatch => Records.LastOrDefault();
 
-        public MatchRepository(string filePath)
+        public FileSystemMatchHistory(IFileSystem fileSystem, string filePath)
         {
+            _fileSystem = fileSystem;
             _csvPath = filePath;
         }
 
@@ -60,17 +63,19 @@ namespace OWRankTracker.Repositories
         private CsvHelper.CsvReader Reader()
         {
             EnsureFileExists();
-            var reader = new CsvHelper.CsvReader(new StreamReader(_csvPath), leaveOpen: false);
-            reader.Configuration.HeaderValidated = null;
-            reader.Configuration.RegisterClassMap(new CSV.MatchRecordConfiguration());
+            StreamReader streamReader = new StreamReader(_fileSystem.File.OpenRead(_csvPath));
+            var csvReader = new CsvHelper.CsvReader(streamReader, leaveOpen: false);
+            csvReader.Configuration.HeaderValidated = null;
+            csvReader.Configuration.RegisterClassMap(new CSV.MatchRecordConfiguration());
 
-            return reader;
+            return csvReader;
         }
 
         private CsvHelper.CsvWriter Writer()
         {
             EnsureFileExists();
-            StreamWriter strmWriter = new StreamWriter(_csvPath, append: true);
+            FileInfoBase fileInfo = _fileSystem.FileInfo.FromFileName(_csvPath);
+            StreamWriter strmWriter = fileInfo.CreateText();
             strmWriter.NewLine = Environment.NewLine;
 
             var writer = new CsvHelper.CsvWriter(strmWriter, leaveOpen: false);
@@ -83,9 +88,10 @@ namespace OWRankTracker.Repositories
 
         private void EnsureFileExists()
         {
-            if(!File.Exists(_csvPath))
+            if(!_fileSystem.File.Exists(_csvPath))
             {
-                StreamWriter writer = new StreamWriter(_csvPath);
+                FileInfoBase fileInfo = _fileSystem.FileInfo.FromFileName(_csvPath);
+                StreamWriter writer = fileInfo.CreateText();
                 using (CsvHelper.CsvWriter csvWriter = new CsvHelper.CsvWriter(writer, leaveOpen: false))
                 {
 

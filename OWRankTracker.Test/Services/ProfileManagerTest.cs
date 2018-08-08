@@ -1,61 +1,53 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using OWRankTracker.Repositories;
+using OWRankTracker.Profile;
 using OWRankTracker.Services;
+using OWRankTracker.Services.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OWRankTracker.Test.Services
 {
     [TestClass]
     public class ProfileManagerTest
     {
-        private FakeProfileStorage _profileStorage;
-        private IMatchRepository _defaultProfile;
-        private IMatchRepository _otherProfile;
+        private InMemoryProfileStorage _profileStorage;
+        private Fixtures.DefaultProfile _defaultProfile;
+        private Fixtures.OtherProfile _otherProfile;
         private Mock<IMessenger> _messenger;
 
         [TestInitialize]
         public void Setup()
         {
-            _defaultProfile = Mock.Of<IMatchRepository>();
+            _defaultProfile = new Fixtures.DefaultProfile();
+            _otherProfile = new Fixtures.OtherProfile();
             _messenger = new Mock<IMessenger>();
-            _otherProfile = Mock.Of<IMatchRepository>();
-            _profileStorage = new FakeProfileStorage(new Dictionary<string, IMatchRepository>()
-            {
-                { "Other", _otherProfile },
-                { "Default",  _defaultProfile }
-            });
+            _profileStorage = new InMemoryProfileStorage(new List<IProfile>() { _defaultProfile, _otherProfile });
         }
 
         [TestMethod]
-        public void ProfileManagerBeginswithNoProfileSelected()
+        public void ProfileManagerBeginswithFirstProfileAlphabeticallySelected()
         {
             // Act
             ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
 
             // Assert
-            Assert.IsNull(manager.ActiveProfile);
-            Assert.IsNull(manager.ActiveProfileName);
+            Assert.AreEqual(_defaultProfile, manager.ActiveProfile);
         }
 
         [TestMethod]
-        public void AllProfiles_ReturnsNamesOfAllDefinedProfiles()
+        public void OnCreation_IfProfileStorageIsEmpty_ProfielManagerCreatesDefaultProfile()
         {
             // Arrange
-            ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
+            var emptyStorage = new InMemoryProfileStorage();
 
             // Act
-            List<string> profiles = manager.AllProfiles().ToList();
+            new ProfileManager(emptyStorage, _messenger.Object);
 
             // Assert
-            Assert.AreEqual(2, profiles.Count());
-            CollectionAssert.Contains(profiles, "Default");
-            CollectionAssert.Contains(profiles, "Other");
+            emptyStorage.Exists("Default");
         }
 
         [TestMethod]
@@ -65,41 +57,23 @@ namespace OWRankTracker.Test.Services
             ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
 
             // Act
-            manager.OpenProfile("Other");
+            manager.OpenProfile(_otherProfile.Name);
 
             // Assert
             Assert.AreEqual(_otherProfile, manager.ActiveProfile);
-            Assert.AreEqual("Other", manager.ActiveProfileName);
         }
 
         [TestMethod]
-        public void OpenDefaultProfile_OpensTheProfileWithTheSameNameAsTheStoragesDefaultProfileName()
+        public void OpenDefaultProfile_OpensFirstProfileAlphabetically()
         {
             // Arrange
             ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
-            _profileStorage.DefaultProfileName = "Other";
-
-            // Act
-            manager.OpenDefaultProfile();
-
-            // Assert
-            Assert.AreEqual(_otherProfile, manager.ActiveProfile);
-            Assert.AreEqual("Other", manager.ActiveProfileName);
-        }
-
-        [TestMethod]
-        public void OpenDefaultProfile_OpensTheFirstProfileAlphabetically_IfTheDefaultProfileDoesNotExist()
-        {
-            // Arrange
-            ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
-            _profileStorage.DefaultProfileName = "Foo";
 
             // Act
             manager.OpenDefaultProfile();
 
             // Assert
             Assert.AreEqual(_defaultProfile, manager.ActiveProfile);
-            Assert.AreEqual("Default", manager.ActiveProfileName);
         }
 
         [TestMethod]
@@ -118,10 +92,9 @@ namespace OWRankTracker.Test.Services
         {
             // Arrange
             ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
-            _profileStorage.DefaultProfileName = "Foo";
 
             // Act
-            manager.OpenDefaultProfile();
+            manager.OpenProfile(_otherProfile.Name);
 
             // Assert
             _messenger.Verify(m => m.Send<Messages.ActiveProfileChanged>(It.IsAny<Messages.ActiveProfileChanged>()));
@@ -134,15 +107,12 @@ namespace OWRankTracker.Test.Services
             ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
 
             // Act
-            manager.OpenDefaultProfile();
+            manager.OpenProfile(_otherProfile.Name);
 
             // Assert
             _messenger.Verify(m =>
                 m.Send<Messages.ActiveProfileChanged>(
-                    It.Is<Messages.ActiveProfileChanged>(msg =>
-                        msg.MatchRepository == _defaultProfile &&
-                        msg.ProfileName == "Default"
-                    )
+                    It.Is<Messages.ActiveProfileChanged>(msg => msg.Profile == _otherProfile)
                 )
             );
         }

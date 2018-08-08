@@ -1,4 +1,5 @@
-﻿using OWRankTracker.Repositories;
+﻿using OWRankTracker.MatchHistory;
+using OWRankTracker.Profile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,10 @@ using System.Threading.Tasks;
 
 namespace OWRankTracker.Services.Storage
 {
-    interface IProfileStorage
+    interface IProfileStorage : IEnumerable<IProfile>
     {
-        string DefaultProfileName { get; }
-        IEnumerable<string> AllProfileNames { get; }
-
         bool Exists(string profileName);
-        IMatchRepository Get(string profileName);
-        IMatchRepository Create(string profileName);
+        IProfile Get(string profileName);
+        IProfile Create(string profileName);
     }
 }
