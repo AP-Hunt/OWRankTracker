@@ -5,14 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OWRankTracker.Profile;
 
 namespace OWRankTracker.DesignTime.Profiles
 {
-    class FiveHundredMatches : InMemoryMatchHistory
+    class FiveHundredMatches : IProfile
     {
-        public FiveHundredMatches() : base(GetRecords())
-        {
+        public string Name { get; private set; }
+        public IMatchHistory MatchHistory { get; private set; }
 
+        public FiveHundredMatches()
+        {
+            Name = "500 Matches";
+            MatchHistory = new InMemoryMatchHistory(GetRecords());
         }
 
         private static IEnumerable<MatchRecord> GetRecords()

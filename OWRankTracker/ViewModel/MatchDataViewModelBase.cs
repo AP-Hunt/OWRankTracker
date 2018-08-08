@@ -12,13 +12,13 @@ namespace OWRankTracker.ViewModel
 {
     class MatchDataViewModelBase : ViewModelBase
     {
-        protected IMatchHistory MatchRepository { get; set; }
+        protected IMatchHistory MatchHistory { get; set; }
         public string ProfileName { get; private set; }
 
         public MatchDataViewModelBase(IProfileManager profileManager)
         {
-            MatchRepository = profileManager.ActiveProfile;
-            ProfileName = profileManager.ActiveProfileName;
+            MatchHistory = profileManager.ActiveProfile.MatchHistory;
+            ProfileName = profileManager.ActiveProfile.Name;
 
             MessengerInstance.Register<Messages.ActiveProfileChanged>(this, OnActiveProfileChanged);
         }
@@ -30,8 +30,8 @@ namespace OWRankTracker.ViewModel
 
         private void OnActiveProfileChanged(ActiveProfileChanged message)
         {
-            MatchRepository = message.MatchHistory;
-            ProfileName = message.ProfileName;
+            MatchHistory = message.Profile.MatchHistory;
+            ProfileName = message.Profile.Name;
             ActiveProfileChanged();
         }
     }

@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OWRankTracker.MatchHistory;
+using OWRankTracker.Profile;
 
 namespace OWRankTracker.Messages
 {
     class ActiveProfileChanged
     {
-        public string ProfileName { get; }
-        public IMatchHistory MatchHistory { get; private set; }
+        public IProfile Profile { get; private set; }
 
-        public ActiveProfileChanged(string profileName, IMatchHistory profileMatchHistory)
+        public ActiveProfileChanged(IProfile profile)
         {
-            ProfileName = profileName;
-            MatchHistory = profileMatchHistory;
+            Profile = profile;
         }
     }
 }

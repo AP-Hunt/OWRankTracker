@@ -29,6 +29,11 @@ namespace OWRankTracker.Services
                     .Pairwise((a, b) => Timestamp(b.Date) - Timestamp(a.Date))
                     .Average();
 
+            if(averageDistance < 0)
+            {
+                return Enumerable.Empty<GameSession>();
+            }
+
             List<GameSession> sessions = new List<GameSession>();
             int lastTimestamp = Timestamp(_records.First().Date);
             int prevCR = _records.First().CR;

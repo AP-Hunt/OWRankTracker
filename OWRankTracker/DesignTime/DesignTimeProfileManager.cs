@@ -4,46 +4,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OWRankTracker.MatchHistory;
+using OWRankTracker.Profile;
 
 namespace OWRankTracker.DesignTime
 {
     class DesignTimeProfileManager : Services.IProfileManager
     {
-        private Dictionary<string, IMatchHistory> _profiles = new Dictionary<string, IMatchHistory>()
+        private List<IProfile> _profiles = new List<IProfile>()
         {
-            { "Winner", new Profiles.Winner() },
-            { "Loser", new Profiles.Loser() },
-            { "500 Records", new Profiles.FiveHundredMatches() }
+            new Profiles.Winner(),
+            new Profiles.Loser(),
+            new Profiles.FiveHundredMatches()
         };
 
+        public IProfile ActiveProfile { get; private set; }
 
-        public IMatchHistory ActiveProfile { get; private set; }
-        public string ActiveProfileName { get; private set; }
+        public IEnumerable<IProfile> Profiles => _profiles;
 
         public DesignTimeProfileManager()
         {
             OpenProfileDefaultProfile(false);
         }
 
-        public IEnumerable<string> AllProfiles()
-        {
-            return _profiles.Keys;
-        }
-
         public void OpenProfile(string name, bool emitMessage = true)
         {
-            if(!_profiles.ContainsKey(name))
+            IProfile profile = _profiles.FirstOrDefault(p => p.Name == name);
+
+            if (profile == null)
             {
                 throw new KeyNotFoundException();
             }
 
-            ActiveProfile = _profiles[name];
-            ActiveProfileName = name;
+
+            ActiveProfile = profile;
         }
 
         public void OpenProfileDefaultProfile(bool emitMessage = true)
         {
-            OpenProfile(_profiles.Keys.First(), emitMessage);
+            OpenProfile(_profiles.First().Name, emitMessage);
         }
     }
 }

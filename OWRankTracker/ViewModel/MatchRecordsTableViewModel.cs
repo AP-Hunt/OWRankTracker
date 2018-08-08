@@ -20,7 +20,7 @@ namespace OWRankTracker.ViewModel
                 if (_records == null)
                 {
                     _records = new ObservableCollection<Model.MatchRecord>(
-                        MatchRepository.OrderByDescending(r => r.Date)
+                        MatchHistory.OrderByDescending(r => r.Date)
                     );
                 }
 
@@ -55,7 +55,7 @@ namespace OWRankTracker.ViewModel
         protected override void ActiveProfileChanged()
         {
             Records = new ObservableCollection<Model.MatchRecord>(
-                MatchRepository.OrderByDescending(r => r.Date)
+                MatchHistory.OrderByDescending(r => r.Date)
             );
             GenerateStatistics();
         }
@@ -63,14 +63,14 @@ namespace OWRankTracker.ViewModel
         private void OnNewRecord(NewMatchRecord message)
         {
             Records = new ObservableCollection<Model.MatchRecord>(
-                MatchRepository.OrderByDescending(r => r.Date)
+                MatchHistory.OrderByDescending(r => r.Date)
             );
             GenerateStatistics();
         }
 
         private void GenerateStatistics()
         {
-            var stats = new Statistics(MatchRepository);
+            var stats = new Statistics(MatchHistory);
             var sessions = stats.FindGameSessions();
 
             AverageSessionCRChange = 0;

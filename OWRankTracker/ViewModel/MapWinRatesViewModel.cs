@@ -83,14 +83,14 @@ namespace OWRankTracker.ViewModel
         {
             string[] maps = Maps.All.Where(m => m != "N/A").ToArray();
 
-            TotalPlayed = MatchRepository.Count();
-            TotalWon = MatchRepository.Wins();
-            TotalDrawn = MatchRepository.Draws();
-            TotalLost = MatchRepository.Losses();
-            TotalWithMaps = MatchRepository.Count(r => r.Map != "N/A");
+            TotalPlayed = MatchHistory.Count();
+            TotalWon = MatchHistory.Wins();
+            TotalDrawn = MatchHistory.Draws();
+            TotalLost = MatchHistory.Losses();
+            TotalWithMaps = MatchHistory.Count(r => r.Map != "N/A");
             Stats = new ObservableCollection<MapStatistics>(
                 from map in maps
-                let matches = MatchRepository.Where(match => match.Map == map)
+                let matches = MatchHistory.Where(match => match.Map == map)
                 orderby matches.Wins() descending, matches.Count() descending
                 select new MapStatistics()
                 {

@@ -29,8 +29,8 @@ namespace OWRankTracker.ViewModel
         public ProfileSelectViewModel(IProfileManager profileManager)
         {
             _profileManager = profileManager;
-            AllProfiles = new ObservableCollection<string>(_profileManager.AllProfiles());
-            _selectedProfile = _profileManager.ActiveProfileName;
+            AllProfiles = new ObservableCollection<string>(_profileManager.Profiles.Select(p => p.Name));
+            _selectedProfile = AllProfiles.First();
         }
 
         private void ProfileChanged(string name)

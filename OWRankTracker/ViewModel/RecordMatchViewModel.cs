@@ -53,7 +53,7 @@ namespace OWRankTracker.ViewModel
                 return;
             }
 
-            var lastMatch = MatchRepository.LastMatch;
+            var lastMatch = MatchHistory.LastMatch;
 
             Model.MatchRecord newMatch;
             if (lastMatch != null)
@@ -74,7 +74,7 @@ namespace OWRankTracker.ViewModel
             }
 
 
-            MatchRepository.Add(newMatch);
+            MatchHistory.Add(newMatch);
             MessengerInstance.Send(new Messages.NewMatchRecord(newMatch));
 
             CR = null;
