@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OWRankTracker.Test.Fixtures
 {
-    class DefaultProfile : IProfile
+    public class DefaultProfile : IProfile
     {
         public string Name => "Default";
         public IMatchHistory MatchHistory { get; private set; }

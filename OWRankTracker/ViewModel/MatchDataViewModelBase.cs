@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OWRankTracker.Profile;
 
 namespace OWRankTracker.ViewModel
 {
@@ -14,11 +15,13 @@ namespace OWRankTracker.ViewModel
     {
         protected IMatchHistory MatchHistory { get; set; }
         public string ProfileName { get; private set; }
+        protected IProfile ActiveProfile { get; private set; }
 
         public MatchDataViewModelBase(IProfileManager profileManager)
         {
             MatchHistory = profileManager.ActiveProfile.MatchHistory;
             ProfileName = profileManager.ActiveProfile.Name;
+            ActiveProfile = profileManager.ActiveProfile;
 
             MessengerInstance.Register<Messages.ActiveProfileChanged>(this, OnActiveProfileChanged);
         }
@@ -32,6 +35,7 @@ namespace OWRankTracker.ViewModel
         {
             MatchHistory = message.Profile.MatchHistory;
             ProfileName = message.Profile.Name;
+            ActiveProfile = message.Profile;
             ActiveProfileChanged();
         }
     }

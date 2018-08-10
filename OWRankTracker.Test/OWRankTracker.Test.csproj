@@ -92,6 +92,7 @@
     <Compile Include="Fakers\MapFaker.cs" />
     <Compile Include="Fakers\MatchRecordFaker.cs" />
     <Compile Include="Fakers\ProfileManagerFaker.cs" />
+    <Compile Include="Fixtures\EmptyProfile.cs" />
     <Compile Include="Fixtures\OtherProfile.cs" />
     <Compile Include="Fixtures\DefaultProfile.cs" />
     <Compile Include="Model\GameSessionTest.cs" />
@@ -103,6 +104,10 @@
     <Compile Include="Services\StatisticsTest.cs" />
     <Compile Include="Services\Storage\FileSystemProfileStorageTest.cs" />
     <Compile Include="ViewModel\MapWinRatesViewModelTest.cs" />
+    <Compile Include="ViewModel\MatchRecordsTableViewModelTest.cs" />
+    <Compile Include="ViewModel\ProfileSelectViewModelTest.cs" />
+    <Compile Include="ViewModel\RankPlotSettingViewModelTest.cs" />
+    <Compile Include="ViewModel\ViewModelTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

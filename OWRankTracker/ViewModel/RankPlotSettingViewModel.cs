@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using OWRankTracker.MatchHistory;
+using OWRankTracker.Profile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,48 +73,25 @@ namespace OWRankTracker.ViewModel
             }
         }
 
-        public RankPlotSettingViewModel(DateTime min, DateTime max)
+        public RankPlotSettingViewModel(IProfile profile)
         {
-            _minDateTime = min;
-            _startDateTime = min;
-
-            _maxDateTime = max;
-            _endDateTime = max;
-
+            SetDateRanges(profile);
             ShowGameSessions = false;
         }
 
         public void ExtendDateRangeEnding(DateTime end)
         {
-            DateTime previousMax = MaxDateTime;
-            MaxDateTime = end;
-
-            if(previousMax == EndDateTime)
-            {
-                EndDateTime = end;
-            }
+            DateTime endOfDate = end.Date + new TimeSpan(23, 59, 59);
+            MaxDateTime = endOfDate;
+            EndDateTime = endOfDate;
         }
 
-        public void ChangeProfile(IMatchHistory profile)
+        public void ChangeProfile(IProfile profile)
         {
             _isProfileChanging = true;
-
-            // Set the min and max values to ensure
-            // the new start and end will be in range
-            MinDateTime = DateTime.MinValue;
-            MaxDateTime = DateTime.MaxValue;
-
-            DateTime start = profile.FirstOrDefault()?.Date ?? DateTime.Today;
-            DateTime end = profile.LastOrDefault()?.Date ?? DateTime.Today;
-
-            StartDateTime = start;
-            EndDateTime = end;
-
-            // Bring the min and max inwards
-            MinDateTime = start;
-            MaxDateTime = end;
-
+            SetDateRanges(profile);
             _isProfileChanging = false;
+
             this.DispatchDateRangeChanged();
         }
 
@@ -122,6 +100,35 @@ namespace OWRankTracker.ViewModel
             if (!_isProfileChanging)
             {
                 MessengerInstance.Send(new Messages.PlotDateRangeChanged(this, StartDateTime, EndDateTime));
+            }
+        }
+
+        private void SetDateRanges(IProfile profile)
+        {
+            if (profile.MatchHistory.Any())
+            {
+                DateTime start = profile.MatchHistory.First().Date;
+                DateTime end = profile.MatchHistory.Last().Date;
+
+                DateTime midnightOfStart = start.Date + new TimeSpan(0, 0, 0);
+                DateTime endOfDayOfEnd = end.Date + new TimeSpan(23, 59, 59);
+
+                _minDateTime = midnightOfStart;
+                _startDateTime = start;
+
+                _maxDateTime = endOfDayOfEnd;
+                _endDateTime = end;
+            }
+            else
+            {
+                DateTime start = DateTime.Today + new TimeSpan(0, 0, 0); ;
+                DateTime end = DateTime.Today + new TimeSpan(23, 59, 59); ;
+
+                _minDateTime = start;
+                _startDateTime = start;
+
+                _maxDateTime = end;
+                _endDateTime = end;
             }
         }
     }

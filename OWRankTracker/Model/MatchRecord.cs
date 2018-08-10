@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OWRankTracker.Model
 {
-    class MatchRecord
+    public class MatchRecord
     {
         public int CR { get; set; }
         public DateTime Date { get; set; }

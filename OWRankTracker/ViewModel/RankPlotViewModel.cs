@@ -87,7 +87,7 @@ namespace OWRankTracker.ViewModel
 
         public RankPlotViewModel(IProfileManager profileManager) : base(profileManager)
         {
-            Settings = new RankPlotSettingViewModel(MatchHistory.FirstOrDefault()?.Date ?? DateTime.Today, MatchHistory.LastOrDefault()?.Date ?? DateTime.Today);
+            Settings = new RankPlotSettingViewModel(ActiveProfile);
             GeneratePlot();
             MessengerInstance.Register<Messages.NewMatchRecord>(this, OnNewRecord);
             MessengerInstance.Register<Messages.PlotDateRangeChanged>(this, OnPlotDateRangeChange);
@@ -117,7 +117,7 @@ namespace OWRankTracker.ViewModel
 
         protected override void ActiveProfileChanged()
         {
-            Settings.ChangeProfile(MatchHistory);
+            Settings.ChangeProfile(ActiveProfile);
             GeneratePlot();
         }
 

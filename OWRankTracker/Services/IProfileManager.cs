@@ -4,7 +4,7 @@ using OWRankTracker.Profile;
 
 namespace OWRankTracker.Services
 {
-    interface IProfileManager
+    public interface IProfileManager
     {
         IEnumerable<IProfile> Profiles { get; }
         IProfile ActiveProfile { get; }

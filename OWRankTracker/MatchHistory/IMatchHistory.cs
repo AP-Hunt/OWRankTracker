@@ -3,7 +3,7 @@ using OWRankTracker.Model;
 
 namespace OWRankTracker.MatchHistory
 {
-    internal interface IMatchHistory : IEnumerable<MatchRecord>
+    public interface IMatchHistory : IEnumerable<MatchRecord>
     {
         MatchRecord LastMatch { get; }
 

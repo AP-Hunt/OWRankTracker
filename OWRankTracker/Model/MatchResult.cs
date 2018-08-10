@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OWRankTracker.Model
 {
-    enum MatchResult
+    public enum MatchResult
     {
         WIN,
         LOSE,

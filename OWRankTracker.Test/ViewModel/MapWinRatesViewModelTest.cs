@@ -12,24 +12,8 @@ using OWRankTracker.ViewModel;
 namespace OWRankTracker.Test.ViewModel
 {
     [TestClass]
-    public class MapWinRatesViewModelTest
+    public class MapWinRatesViewModelTest : ViewModelTestBase
     {
-        private IProfileManager _profileManager;
-        private IMessenger _messenger;
-        private Fixtures.DefaultProfile _defaultProfile;
-        private Fixtures.OtherProfile _alternateProfile;
-
-        [TestInitialize]
-        public void Setup()
-        {
-            _defaultProfile = new Fixtures.DefaultProfile();
-            _alternateProfile = new Fixtures.OtherProfile();
-            _messenger = Messenger.Default;
-
-            var profiles = new List<IProfile>() { _defaultProfile, _alternateProfile };
-            _profileManager = ProfileManagerFaker.CreateSimpleManager(profiles, _messenger);
-        }
-
         [TestMethod]
         public void OnCreation_CalculatesTotalPlayed()
         {
@@ -170,6 +154,23 @@ namespace OWRankTracker.Test.ViewModel
 
             // Assert
             Assert.AreEqual(lost + 1, vm.TotalLost);
+        }
+
+        [TestMethod]
+        public void OnProfileChange_RecalculatesStatistics_ForNewActiveProfile()
+        {
+            // Arrange
+            MapWinRatesViewModel vm = new MapWinRatesViewModel(_profileManager);
+
+            // Act
+            _profileManager.OpenProfile(_alternateProfile.Name);
+
+            // Assert
+            Assert.AreEqual(_alternateProfile.MatchHistory.Count(), vm.TotalPlayed);
+            Assert.AreEqual(_alternateProfile.MatchHistory.Wins(), vm.TotalWon);
+            Assert.AreEqual(_alternateProfile.MatchHistory.Draws(), vm.TotalDrawn);
+            Assert.AreEqual(_alternateProfile.MatchHistory.Losses(), vm.TotalLost);
+            Assert.AreEqual(_alternateProfile.MatchHistory.Count(p => p.Map != "N/A"), vm.TotalWithMaps);
         }
 
         private void NewMatchRecord(MatchRecord record)

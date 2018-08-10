@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OWRankTracker.Profile
 {
-    interface IProfile
+    public interface IProfile
     {
         string Name { get; }
         IMatchHistory MatchHistory { get; }
