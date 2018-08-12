@@ -25,11 +25,16 @@ artifacts:
     - path: OWRankTracker\bin\$(configuration)
       name: OWRankTracker-$(APPVEYOR_BUILD_VERSION)
 
+before_deploy:
+    - ps: >-
+        ${env:release_description} = (Get-Content "./ReleaseNotes/${env:APPVEYOR_REPO_TAG_NAME}.txt") - join "`n";
+
 deploy:
     - provider:  GitHub
       auth_token:
           secure: RM5VRaDPrGHUmXhx2H9fF75MzpjeeCsTiSdDA8geFD3fFWz9JawwezptRY+eeQsX
       artifact: OWRankTracker-$(APPVEYOR_BUILD_VERSION)
+      description: $(release_description)
       on:
           appveyor_repo_tag: true
 
