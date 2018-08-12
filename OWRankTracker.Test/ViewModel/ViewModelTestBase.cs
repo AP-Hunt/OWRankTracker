@@ -20,7 +20,7 @@ namespace OWRankTracker.Test.ViewModel
         protected Fixtures.EmptyProfile _emptyProfile;
 
         [TestInitialize]
-        public void Setup()
+        public virtual void Setup()
         {
             _defaultProfile = new Fixtures.DefaultProfile();
             _alternateProfile = new Fixtures.OtherProfile();

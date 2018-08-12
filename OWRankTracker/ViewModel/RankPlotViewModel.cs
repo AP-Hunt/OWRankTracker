@@ -161,6 +161,9 @@ namespace OWRankTracker.ViewModel
             else
             {
                 DataSeries = new SeriesCollection();
+                #if UNIT_TEST
+                    
+                #endif
             }
             DataSeries.Add(lineSeries);
             Labels = xLabels.ToArray();
