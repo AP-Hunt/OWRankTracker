@@ -15,6 +15,11 @@ build:
     project: OWRankTracker.sln
     verbosity: minimal
 
+test:
+    assemblies:
+        only:
+            - OWRankTracker.Test\bin\$(configuration)\OWRankTracker.Test.dll
+
 artifacts:
     - path: OWRankTracker\bin\$(configuration)
       name: compiled_package
