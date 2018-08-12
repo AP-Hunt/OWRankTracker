@@ -30,26 +30,12 @@
 
             <ItemsControl.Items>
                 From:
-                <xwpf:DateTimePicker 
-                    AutoCloseCalendar="True" 
-                    Value="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" 
-                    Minimum="{Binding MinDate, UpdateSourceTrigger=PropertyChanged}"
-                    Maximum="{Binding MaxDate, UpdateSourceTrigger=PropertyChanged}"
-                    Format="ShortDate" 
-                    ShowButtonSpinner="False"
-                    ClipValueToMinMax="False">
-                </xwpf:DateTimePicker>
+                <DatePicker SelectedDate="{Binding StartDate}" DisplayDateStart="{Binding MinDate}" DisplayDateEnd="{Binding MaxDate}">
+                </DatePicker>
 
                 To:
-                <xwpf:DateTimePicker 
-                    AutoCloseCalendar="True" 
-                    Value="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" 
-                    Minimum="{Binding MinDate, UpdateSourceTrigger=PropertyChanged}"
-                    Maximum="{Binding MaxDate, UpdateSourceTrigger=PropertyChanged}"
-                    Format="ShortDate" 
-                    ShowButtonSpinner="False"
-                    ClipValueToMinMax="False">
-                </xwpf:DateTimePicker>
+                <DatePicker SelectedDate="{Binding EndDate}" DisplayDateStart="{Binding MinDate}" DisplayDateEnd="{Binding MaxDate}">
+                </DatePicker>
             </ItemsControl.Items>
         </ItemsControl>
 

@@ -58,7 +58,7 @@ namespace OWRankTracker.ViewModel
                     value.Date
                     + new TimeSpan(0, 0, 0);
 
-                Set(ref _startDate, newDT);
+                Set(ref _startDate, newDT, broadcast: !_isProfileChanging);
                 this.DispatchDateRangeChanged();
             }
         }
@@ -107,7 +107,7 @@ namespace OWRankTracker.ViewModel
                     value.Date
                     + new TimeSpan(23, 59, 59);
 
-                Set(ref _endDate, newDT);
+                Set(ref _endDate, newDT, broadcast: !_isProfileChanging);
                 this.DispatchDateRangeChanged();
             }
         }
@@ -131,6 +131,8 @@ namespace OWRankTracker.ViewModel
             _isProfileChanging = false;
 
             this.DispatchDateRangeChanged();
+            RaisePropertyChanged(nameof(EndDate));
+            RaisePropertyChanged(nameof(StartDate));
         }
 
         private void DispatchDateRangeChanged()

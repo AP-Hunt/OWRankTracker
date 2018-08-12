@@ -71,13 +71,6 @@ namespace OWRankTracker.ViewModel
             set { Set(ref _yAxisStartValue, value); }
         }
 
-        private IChartLegend _legend = null;
-        public IChartLegend Legend
-        {
-            get { return _legend; }
-            set { Set(ref _legend, value); }
-        }
-
         public RankPlotViewModel(IProfileManager profileManager) : base(profileManager)
         {
             Settings = new RankPlotSettingViewModel(ActiveProfile);
@@ -97,15 +90,6 @@ namespace OWRankTracker.ViewModel
         private void OnNewRecord(NewMatchRecord message)
         {
             Settings.ExtendDateRangeEnding(MatchHistory.Last().Date);
-            AddRecordToPlot(message.Record);
-        }
-
-        private void AddRecordToPlot(MatchRecord record)
-        {
-            if(DataSeries != null)
-            {
-                DataSeries.First().Values.Add(new LiveCharts.Defaults.ObservableValue(record.CR));
-            }
         }
 
         protected override void ActiveProfileChanged()
@@ -140,7 +124,7 @@ namespace OWRankTracker.ViewModel
                 .Stroke(ShouldBeWeekendColoured(weekendBrush));
 
             var xLabels =
-                from r in MatchHistory
+                from r in matchesInDateRange
                 select r.Date.ToString("G");
 
 
