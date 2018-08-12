@@ -21,54 +21,100 @@ namespace OWRankTracker.ViewModel
             set { Set(ref _showGameSessions, value); }
         }
 
-        private DateTime _minDateTime;
-        public DateTime MinDateTime
+        private DateTime _minDate;
+        /// <summary>
+        /// Sets the minimum date selectable
+        /// </summary>
+        /// <remarks>
+        /// Ignores time component, and uses midnight
+        /// of the given date
+        /// </remarks>
+        public DateTime MinDate
         {
-            get { return _minDateTime; }
+            get { return _minDate; }
             set
             {
                 try
                 {
-                    Set(ref _minDateTime, value);
+                    DateTime newDT =
+                        value.Date
+                        + new TimeSpan(0, 0, 0);
+
+                    Set(ref _minDate, newDT);
+                    this.DispatchDateRangeChanged();
                 }
                 catch (ArgumentOutOfRangeException)
                 { }
             }
         }
 
-        private DateTime _startDateTime;
-        public DateTime StartDateTime
+        private DateTime _startDate;
+        /// <summary>
+        /// Sets the starting date of the rank plot
+        /// </summary>
+        /// <remarks>
+        /// Ignores time component, and uses midnight
+        /// of the given date
+        /// </remarks>
+        public DateTime StartDate
         {
-            get { return _startDateTime; }
+            get { return _startDate; }
             set 
-            { 
-                Set(ref _startDateTime, value);
+            {
+                DateTime newDT =
+                    value.Date
+                    + new TimeSpan(0, 0, 0);
+
+                Set(ref _startDate, newDT);
                 this.DispatchDateRangeChanged();
             }
         }
 
-        private DateTime _maxDateTime;
-        public DateTime MaxDateTime
+        private DateTime _maxDate;
+        /// <summary>
+        /// Sets the maximum date selectable
+        /// </summary>
+        /// <remarks>
+        /// Ignores time component, and uses midnight
+        /// of the given date
+        /// </remarks>
+        public DateTime MaxDate
         {
-            get { return _maxDateTime; }
+            get { return _maxDate; }
             set
             {
                 try
                 {
-                    Set(ref _maxDateTime, value);
+                    DateTime newDT =
+                        value.Date
+                        + new TimeSpan(23, 59, 59);
+
+                    Set(ref _maxDate, newDT);
+                    this.DispatchDateRangeChanged();
                 }
                 catch (ArgumentOutOfRangeException)
                 { }
             }
         }
 
-        private DateTime _endDateTime;
-        public DateTime EndDateTime
+        private DateTime _endDate;
+        /// <summary>
+        /// Sets the end date of the rank plot
+        /// </summary>
+        /// <remarks>
+        /// Ignores time component, and uses midnight
+        /// of the given date
+        /// </remarks>
+        public DateTime EndDate
         {
-            get { return _endDateTime; }
+            get { return _endDate; }
             set 
-            { 
-                Set(ref _endDateTime, value);
+            {
+                DateTime newDT =
+                    value.Date
+                    + new TimeSpan(23, 59, 59);
+
+                Set(ref _endDate, newDT);
                 this.DispatchDateRangeChanged();
             }
         }
@@ -82,8 +128,8 @@ namespace OWRankTracker.ViewModel
         public void ExtendDateRangeEnding(DateTime end)
         {
             DateTime endOfDate = end.Date + new TimeSpan(23, 59, 59);
-            MaxDateTime = endOfDate;
-            EndDateTime = endOfDate;
+            MaxDate = endOfDate;
+            EndDate = endOfDate;
         }
 
         public void ChangeProfile(IProfile profile)
@@ -99,37 +145,35 @@ namespace OWRankTracker.ViewModel
         {
             if (!_isProfileChanging)
             {
-                MessengerInstance.Send(new Messages.PlotDateRangeChanged(this, StartDateTime, EndDateTime));
+                MessengerInstance.Send(new Messages.PlotDateRangeChanged(this, StartDate, EndDate));
             }
         }
 
         private void SetDateRanges(IProfile profile)
         {
+            DateTime start;
+            DateTime end;
             if (profile.MatchHistory.Any())
             {
-                DateTime start = profile.MatchHistory.First().Date;
-                DateTime end = profile.MatchHistory.Last().Date;
-
-                DateTime midnightOfStart = start.Date + new TimeSpan(0, 0, 0);
-                DateTime endOfDayOfEnd = end.Date + new TimeSpan(23, 59, 59);
-
-                _minDateTime = midnightOfStart;
-                _startDateTime = start;
-
-                _maxDateTime = endOfDayOfEnd;
-                _endDateTime = end;
+                start = profile.MatchHistory.First().Date;
+                end = profile.MatchHistory.Last().Date;
             }
             else
             {
-                DateTime start = DateTime.Today + new TimeSpan(0, 0, 0); ;
-                DateTime end = DateTime.Today + new TimeSpan(23, 59, 59); ;
-
-                _minDateTime = start;
-                _startDateTime = start;
-
-                _maxDateTime = end;
-                _endDateTime = end;
+                start = DateTime.Today;
+                end = DateTime.Today;
+                
             }
+
+            // Set min and max first
+            // to prevent start and end
+            // being out of bounds
+            MinDate = start;
+            MaxDate = end;
+
+            StartDate = start;
+            EndDate = end;
+
         }
     }
 }

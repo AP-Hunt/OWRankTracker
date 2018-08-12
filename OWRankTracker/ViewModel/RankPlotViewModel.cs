@@ -123,7 +123,7 @@ namespace OWRankTracker.ViewModel
 
         private void GeneratePlot()
         {
-            var matchesInDateRange = MatchHistory.Where(m => Between(m, Settings.StartDateTime, Settings.EndDateTime));
+            var matchesInDateRange = MatchHistory.Where(m => Between(m, Settings.StartDate, Settings.EndDate));
 
             var lineSeries = new LineSeries
             {

@@ -32,9 +32,9 @@
                 From:
                 <xwpf:DateTimePicker 
                     AutoCloseCalendar="True" 
-                    Value="{Binding StartDateTime, UpdateSourceTrigger=PropertyChanged}" 
-                    Minimum="{Binding MinDateTime, UpdateSourceTrigger=PropertyChanged}"
-                    Maximum="{Binding MaxDateTime, UpdateSourceTrigger=PropertyChanged}"
+                    Value="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" 
+                    Minimum="{Binding MinDate, UpdateSourceTrigger=PropertyChanged}"
+                    Maximum="{Binding MaxDate, UpdateSourceTrigger=PropertyChanged}"
                     Format="ShortDate" 
                     ShowButtonSpinner="False"
                     ClipValueToMinMax="False">
@@ -43,9 +43,9 @@
                 To:
                 <xwpf:DateTimePicker 
                     AutoCloseCalendar="True" 
-                    Value="{Binding EndDateTime, UpdateSourceTrigger=PropertyChanged}" 
-                    Minimum="{Binding MinDateTime, UpdateSourceTrigger=PropertyChanged}"
-                    Maximum="{Binding MaxDateTime, UpdateSourceTrigger=PropertyChanged}"
+                    Value="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" 
+                    Minimum="{Binding MinDate, UpdateSourceTrigger=PropertyChanged}"
+                    Maximum="{Binding MaxDate, UpdateSourceTrigger=PropertyChanged}"
                     Format="ShortDate" 
                     ShowButtonSpinner="False"
                     ClipValueToMinMax="False">
