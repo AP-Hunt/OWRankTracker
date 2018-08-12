@@ -27,7 +27,7 @@ artifacts:
 
 before_deploy:
     - ps: >-
-        ${env:release_description} = (Get-Content "./ReleaseNotes/${env:APPVEYOR_REPO_TAG_NAME}.txt") - join "`n";
+        ${env:release_description} = (Get-Content "./ReleaseNotes/${env:APPVEYOR_REPO_TAG_NAME}.txt") -join "`n";
 
 deploy:
     - provider:  GitHub

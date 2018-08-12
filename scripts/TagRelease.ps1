@@ -22,3 +22,6 @@ notepad.exe $tagNotesPath | Out-Null;
 
 Write-Host "Tagging release";
 git tag -a $tag -m "${tag}";
+
+git add $tagNotesPath;
+git commit -m "${tag}";
