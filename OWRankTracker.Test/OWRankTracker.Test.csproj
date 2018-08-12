@@ -107,7 +107,6 @@
     <Compile Include="Model\MapStatisticsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProfileManagerTest.cs" />
-    <Compile Include="Services\StatisticsTest.cs" />
     <Compile Include="Services\Storage\FileSystemProfileStorageTest.cs" />
     <Compile Include="ViewModel\MapWinRatesViewModelTest.cs" />
     <Compile Include="ViewModel\MatchRecordsTableViewModelTest.cs" />
