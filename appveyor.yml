@@ -23,13 +23,13 @@ test:
 
 artifacts:
     - path: OWRankTracker\bin\$(configuration)
-      name: compiled_package
+      name: OWRankTracker-$(APPVEYOR_BUILD_VERSION)
 
 deploy:
     - provider:  GitHub
       auth_token:
           secure: RM5VRaDPrGHUmXhx2H9fF75MzpjeeCsTiSdDA8geFD3fFWz9JawwezptRY+eeQsX
-      artifact: compiled_package
+      artifact: OWRankTracker-$(APPVEYOR_BUILD_VERSION)
       on:
           appveyor_repo_tag: true
 
