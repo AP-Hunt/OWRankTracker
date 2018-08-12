@@ -78,13 +78,6 @@ namespace OWRankTracker.ViewModel
             set { Set(ref _legend, value); }
         }
 
-        private SectionsCollection _xAxisSections;
-        public SectionsCollection XAxisSections
-        {
-            get { return _xAxisSections; }
-            set { Set(ref _xAxisSections, value); }
-        }
-
         public RankPlotViewModel(IProfileManager profileManager) : base(profileManager)
         {
             Settings = new RankPlotSettingViewModel(ActiveProfile);
@@ -161,29 +154,12 @@ namespace OWRankTracker.ViewModel
             else
             {
                 DataSeries = new SeriesCollection();
-                #if UNIT_TEST
-                    
-                #endif
             }
             DataSeries.Add(lineSeries);
             Labels = xLabels.ToArray();
             YFormatter = yFormatter;
             XFormatter = xFormatter;
             YAxisStartValue = matchesInDateRange.FirstOrDefault()?.CR ?? 0;
-
-            if(XAxisSections != null)
-            {
-                XAxisSections.Clear();
-            }
-            else
-            {
-                XAxisSections = new SectionsCollection();
-            }
-
-            if (Settings.ShowGameSessions)
-            {
-                XAxisSections.AddRange(CreateXAxisSections());
-            }
         }
 
         private bool Between(Model.MatchRecord record, DateTime start, DateTime end)
@@ -201,39 +177,6 @@ namespace OWRankTracker.ViewModel
                 }
                 return IsWeekendDay(MatchHistory.ElementAt(index).Date) ? weekendBrush : null;
             };
-        }
-
-        private SectionsCollection CreateXAxisSections()
-        {
-            var stats = new Statistics(MatchHistory);
-            var sessions = stats.FindGameSessions();
-
-            SectionsCollection sections = new SectionsCollection();
-
-            Brush[] brushes = new Brush[]
-            {
-                Brushes.AntiqueWhite,
-                Brushes.Beige,
-                Brushes.Lavender
-            };
-
-            int start = 0;
-            int brushIndex = 0;
-            foreach(Model.GameSession session in sessions)
-            {
-                sections.Add(new AxisSection()
-                {
-                    Value = start,
-                    SectionWidth = session.Count(),
-                    Fill = brushes[brushIndex]
-                });
-
-                start += session.Count();
-                brushIndex = (brushIndex+1)% brushes.Length;
-            }
-
-
-            return sections;
         }
 
         private bool IsWeekendDay(DateTime date)

@@ -14,13 +14,6 @@ namespace OWRankTracker.ViewModel
     {
         private bool _isProfileChanging = false;
 
-        private bool _showGameSessions;
-        public bool ShowGameSessions
-        {
-            get { return _showGameSessions; }
-            set { Set(ref _showGameSessions, value); }
-        }
-
         private DateTime _minDate;
         /// <summary>
         /// Sets the minimum date selectable
@@ -122,7 +115,6 @@ namespace OWRankTracker.ViewModel
         public RankPlotSettingViewModel(IProfile profile)
         {
             SetDateRanges(profile);
-            ShowGameSessions = false;
         }
 
         public void ExtendDateRangeEnding(DateTime end)

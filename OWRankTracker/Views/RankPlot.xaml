@@ -50,9 +50,6 @@
                     ShowButtonSpinner="False"
                     ClipValueToMinMax="False">
                 </xwpf:DateTimePicker>
-
-                <CheckBox IsChecked="{Binding ShowGameSessions}">Show game sessions?</CheckBox>
-
             </ItemsControl.Items>
         </ItemsControl>
 
@@ -101,7 +98,6 @@
                     ShowLabels="False"
                     Labels="{Binding Labels, UpdateSourceTrigger=PropertyChanged}" 
                     LabelFormatter="{Binding XFormatter, UpdateSourceTrigger=PropertyChanged}"
-                    Sections="{Binding XAxisSections, UpdateSourceTrigger=PropertyChanged}"
                 />
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>

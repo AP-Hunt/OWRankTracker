@@ -49,7 +49,6 @@ namespace OWRankTracker.ViewModel
         public MatchRecordsTableViewModel(IProfileManager profileManager) : base(profileManager)
         {
             MessengerInstance.Register<Messages.NewMatchRecord>(this, OnNewRecord);
-            GenerateStatistics();
         }
 
         protected override void ActiveProfileChanged()
@@ -57,7 +56,6 @@ namespace OWRankTracker.ViewModel
             Records = new ObservableCollection<Model.MatchRecord>(
                 MatchHistory.OrderByDescending(r => r.Date)
             );
-            GenerateStatistics();
         }
 
         private void OnNewRecord(NewMatchRecord message)
@@ -65,20 +63,6 @@ namespace OWRankTracker.ViewModel
             Records = new ObservableCollection<Model.MatchRecord>(
                 MatchHistory.OrderByDescending(r => r.Date)
             );
-            GenerateStatistics();
-        }
-
-        private void GenerateStatistics()
-        {
-            var stats = new Statistics(MatchHistory);
-            var sessions = stats.FindGameSessions();
-
-            AverageSessionCRChange = 0;
-            if (sessions.Any())
-            {
-                sessions.Select(s => s.CRChange).Average();
-            }
-            TotalSessions = sessions.Count();
         }
     }
 }

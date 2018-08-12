@@ -24,14 +24,6 @@
         >
             Match Data
         </TextBlock>
-        <TextBlock DockPanel.Dock="Top">
-            <TextBlock.Text>
-                <MultiBinding xml:space="preserve" StringFormat="{}Average session CR change: {0} (over {1} sessions)">
-                    <Binding Path="AverageSessionCRChange" />
-                    <Binding Path="TotalSessions" />
-                </MultiBinding>
-            </TextBlock.Text>
-        </TextBlock>
         <DataGrid 
             ItemsSource="{Binding Records, UpdateSourceTrigger=PropertyChanged}"
             AutoGenerateColumns="True"

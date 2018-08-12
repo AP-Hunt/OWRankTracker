@@ -143,7 +143,6 @@
     <Compile Include="MatchHistory\FileSystemMatchHistory.cs" />
     <Compile Include="Services\IProfileManager.cs" />
     <Compile Include="Services\ProfileManager.cs" />
-    <Compile Include="Services\Statistics.cs" />
     <Compile Include="Services\Storage\FileSystemProfileStorage.cs" />
     <Compile Include="Services\Storage\InMemoryProfileStorage.cs" />
     <Compile Include="Services\Storage\IProfileStorage.cs" />
