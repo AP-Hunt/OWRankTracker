@@ -1,0 +1,5 @@
+This is primarily a stabilising release before new work.
+
++ Bug fixes
++ Improved test coverage
++ Removes match session statistics (buggy)
