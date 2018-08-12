@@ -41,18 +41,12 @@ namespace OWRankTracker.ViewModel
 
         public RecordMatchViewModel(IProfileManager profileManager) : base(profileManager)
         {
-            SaveCommand = new RelayCommand(Save);
+            SaveCommand = new RelayCommand(Save, () => CR.HasValue);
             SelectedMap = Maps.First();
         }
 
         private void Save()
         {
-            if(!CR.HasValue)
-            {
-                MessageBox.Show("CR must be a number");
-                return;
-            }
-
             var lastMatch = MatchHistory.LastMatch;
 
             Model.MatchRecord newMatch;

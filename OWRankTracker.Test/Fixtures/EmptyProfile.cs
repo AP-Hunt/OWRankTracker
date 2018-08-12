@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OWRankTracker.Test.Fixtures
 {
-    class EmptyProfile : IProfile
+    public class EmptyProfile : IProfile
     {
         public string Name => "Empty";
         public IMatchHistory MatchHistory { get; private set; }
