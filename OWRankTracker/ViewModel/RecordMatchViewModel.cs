@@ -11,6 +11,8 @@ namespace OWRankTracker.ViewModel
 {
     class RecordMatchViewModel : MatchDataViewModelBase
     {
+        private readonly GalaSoft.MvvmLight.Views.IDialogService _dialogService;
+
         private int? _cr;
         public int? CR
         {
@@ -39,13 +41,14 @@ namespace OWRankTracker.ViewModel
 
         public RelayCommand SaveCommand { get; private set; }
 
-        public RecordMatchViewModel(IProfileManager profileManager) : base(profileManager)
+        public RecordMatchViewModel(IProfileManager profileManager, GalaSoft.MvvmLight.Views.IDialogService dialogService) : base(profileManager)
         {
+            _dialogService = dialogService;
             SaveCommand = new RelayCommand(Save, () => CR.HasValue);
             SelectedMap = Maps.First();
         }
 
-        private void Save()
+        private async void Save()
         {
             var lastMatch = MatchHistory.LastMatch;
 
@@ -56,7 +59,7 @@ namespace OWRankTracker.ViewModel
             }
             else
             {
-                MessageBox.Show("Recording first game as a win, because there are no previous records to base it on");
+                await _dialogService.ShowMessage("Recording first game as a win, because there are no previous records to base it on", "Recording new match");
                 newMatch = new Model.MatchRecord()
                 { 
                     CR = CR.Value,

@@ -46,6 +46,7 @@ namespace OWRankTracker.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<GalaSoft.MvvmLight.Messaging.IMessenger>(() => GalaSoft.MvvmLight.Messaging.Messenger.Default);
+            SimpleIoc.Default.Register<GalaSoft.MvvmLight.Views.IDialogService, Services.Wpf.MessageBoxService>();
             SimpleIoc.Default.Register<Services.IProfileManager>(() => profMgr);
             SimpleIoc.Default.Register<Services.ProfileManager>(() => profMgr);
             SimpleIoc.Default.Register<MainViewModel>();

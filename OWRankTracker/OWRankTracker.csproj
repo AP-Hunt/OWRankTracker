@@ -122,6 +122,7 @@
     <Compile Include="CSV\MatchRecordConfiguration.cs" />
     <Compile Include="Profile\IProfile.cs" />
     <Compile Include="Services\ProfileNameConflictException.cs" />
+    <Compile Include="Services\Wpf\MessageBoxService.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMainViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeProfileManager.cs" />
     <Compile Include="DesignTime\Profiles\FiveHundredMatches.cs" />

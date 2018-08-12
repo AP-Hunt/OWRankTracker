@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using OWRankTracker.Model;
 using OWRankTracker.ViewModel;
 using System;
@@ -12,11 +13,25 @@ namespace OWRankTracker.Test.ViewModel
     [TestClass]
     public class RecordMatchViewModelTest : ViewModelTestBase
     {
+        Mock<GalaSoft.MvvmLight.Views.IDialogService> _mockDialogService;
+
+        [TestInitialize]
+        public override void Setup()
+        {
+            base.Setup();
+
+            _mockDialogService = new Mock<GalaSoft.MvvmLight.Views.IDialogService>();
+
+            _mockDialogService
+                .Setup(d => d.ShowMessage(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(true));
+        }
+
         [TestMethod]
         public void OnSave_WhenAtLeastOneMatchExists_CreatesNewMatch_WithResultRelativeToLastResult()
         {
             // Arrange
-            RecordMatchViewModel vm = new RecordMatchViewModel(_profileManager);
+            RecordMatchViewModel vm = new RecordMatchViewModel(_profileManager, _mockDialogService.Object);
             string map = vm.Maps[1];
             vm.SelectedMap = map;
 
@@ -43,7 +58,7 @@ namespace OWRankTracker.Test.ViewModel
         public void OnSave_WhenNoMatchesExist_CreatesNewMatch_AsAWin_AndDifferenceAsCR()
         {
             // Arrange
-            RecordMatchViewModel vm = new RecordMatchViewModel(_profileManager);
+            RecordMatchViewModel vm = new RecordMatchViewModel(_profileManager, _mockDialogService.Object);
             _profileManager.OpenProfile(_emptyProfile.Name);
 
             string map = vm.Maps[1];
