@@ -20,8 +20,7 @@ if(![System.IO.File]::Exists($tagNotesPath))
 Write-Host "Launching editor for patch notes";
 notepad.exe $tagNotesPath | Out-Null;
 
-Write-Host "Tagging release";
-git tag -a $tag -m "${tag}";
-
+Write-Host "Tagging Release";
 git add $tagNotesPath;
 git commit -m "${tag}";
+git tag -a $tag -m "${tag"};
