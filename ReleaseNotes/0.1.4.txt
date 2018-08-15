@@ -1,0 +1,1 @@
+Fixes show stopping bug that caused data to be truncated and overwritten
