@@ -75,7 +75,7 @@ namespace OWRankTracker.MatchHistory
         {
             EnsureFileExists();
             FileInfoBase fileInfo = _fileSystem.FileInfo.FromFileName(_csvPath);
-            StreamWriter strmWriter = fileInfo.CreateText();
+            StreamWriter strmWriter = fileInfo.AppendText();
             strmWriter.NewLine = Environment.NewLine;
 
             var writer = new CsvHelper.CsvWriter(strmWriter, leaveOpen: false);
@@ -91,7 +91,7 @@ namespace OWRankTracker.MatchHistory
             if(!_fileSystem.File.Exists(_csvPath))
             {
                 FileInfoBase fileInfo = _fileSystem.FileInfo.FromFileName(_csvPath);
-                StreamWriter writer = fileInfo.CreateText();
+                StreamWriter writer = fileInfo.AppendText();
                 using (CsvHelper.CsvWriter csvWriter = new CsvHelper.CsvWriter(writer, leaveOpen: false))
                 {
 
