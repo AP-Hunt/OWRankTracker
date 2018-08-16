@@ -49,52 +49,38 @@ namespace OWRankTracker.Services.Wpf
             Action<bool> afterHideInternal = null)
         {
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            Task<bool> task = tcs.Task;
 
-            var dialog = new Xceed.Wpf.Toolkit.MessageBox();
-            dialog.Caption = title;
-            dialog.Text = message;
-            dialog.OkButtonContent = buttonConfirmText;
-            
-            if(buttonCancelText != null)
-            {
-                dialog.CancelButtonContent = buttonCancelText;
-            }
-
-            dialog.Closed += (sender, args) =>
-            {
-                afterHideCallback?.Invoke();
-
-                bool result;
-                switch(dialog.MessageBoxResult)
-                {
-                    default:
-                    case MessageBoxResult.Cancel:
-                    case MessageBoxResult.No:
-                    case MessageBoxResult.None:
-                        result = false;
-                        break;
-
-                    case MessageBoxResult.OK:
-                    case MessageBoxResult.Yes:
-                        result = true;
-                        break;
-                }
-
-                afterHideCallbackWithResponse?.Invoke(result);
-                afterHideInternal?.Invoke(result);
-            };
+            MessageBoxWindow msgBoxWindow = new MessageBoxWindow(
+                message,
+                title,
+                buttonConfirmText,
+                buttonCancelText
+            );
 
             try
             {
-                bool? result = dialog.ShowDialog();
-                tcs.TrySetResult(result.HasValue ? result.Value : false);
+                bool? result = msgBoxWindow.ShowDialog();
+
+                afterHideCallback?.Invoke();
+
+                if (result.HasValue)
+                {
+                    afterHideCallbackWithResponse?.Invoke(result.Value);
+                    afterHideInternal?.Invoke(result.Value);
+                    tcs.TrySetResult(result.Value);
+                }
+                else
+                {
+                    tcs.TrySetResult(false);
+                }
             }
             catch(Exception ex)
             {
                 tcs.TrySetException(ex);
             }
 
-            return tcs.Task;
+            return task;
         }
     }
 }

@@ -24,11 +24,6 @@ namespace OWRankTracker
                 new FrameworkPropertyMetadata(
                     XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-            FrameworkElement.LanguageProperty.OverrideMetadata(
-                typeof(Xceed.Wpf.Toolkit.DateTimePicker),
-                new FrameworkPropertyMetadata(
-                    XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
-
             DispatcherHelper.Initialize();
         }
     }
