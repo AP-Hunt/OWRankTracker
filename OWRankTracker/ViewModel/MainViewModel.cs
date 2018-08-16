@@ -39,12 +39,5 @@ namespace OWRankTracker.ViewModel
             MapWinRatesViewModel = mapWinRatesViewModel;
             ProfileSelectViewModel = profileSelectViewModel;
         }
-
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean up if needed
-
-        ////    base.Cleanup();
-        ////}
     }
 }

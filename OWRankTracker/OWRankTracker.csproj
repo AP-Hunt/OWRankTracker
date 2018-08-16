@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -102,12 +105,19 @@
     <Compile Include="AppStartup.cs" />
     <Compile Include="CSV\MatchResultTypeConverter.cs" />
     <Compile Include="CSV\MatchRecordConfiguration.cs" />
+    <Compile Include="DependencyInjection\Container.cs" />
     <Compile Include="Profile\IProfile.cs" />
     <Compile Include="Services\ProfileNameConflictException.cs" />
     <Compile Include="Services\Wpf\MessageBoxWindow.xaml.cs">
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Wpf\MessageBoxService.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\ViewModelLocatorRegistrations.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelLocatorRegistrations.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Design\DesignTimeMainViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeProfileManager.cs" />
     <Compile Include="DesignTime\Profiles\FiveHundredMatches.cs" />
@@ -140,7 +150,6 @@
     <Compile Include="ViewModel\RankPlotSettingViewModel.cs" />
     <Compile Include="ViewModel\RankPlotViewModel.cs" />
     <Compile Include="ViewModel\RecordMatchViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\MapWinRates.xaml.cs">
       <DependentUpon>MapWinRates.xaml</DependentUpon>
     </Compile>
@@ -224,6 +233,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ViewModel\ViewModelLocatorRegistrations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewModelLocatorRegistrations.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

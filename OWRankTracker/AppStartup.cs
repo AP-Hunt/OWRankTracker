@@ -1,4 +1,5 @@
-﻿using CommonServiceLocator;
+﻿using Autofac;
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using OWRankTracker.Services;
 using System;
@@ -14,9 +15,7 @@ namespace OWRankTracker
     {
         public static void Startup(Window parent)
         {
-            ViewModel.ViewModelLocator locator = new ViewModel.ViewModelLocator();
-            
-            IProfileManager profileManager = ServiceLocator.Current.GetInstance<IProfileManager>();
+            IProfileManager profileManager = DependencyInjection.Container.Instance.Resolve<IProfileManager>();
             profileManager.OpenDefaultProfile(emitMessage: false);
         }
     }

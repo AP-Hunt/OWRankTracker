@@ -13,7 +13,7 @@
         Title="Overwatch Rank Tracker"
         MinWidth="600"
         MinHeight="600"
-        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
         d:DataContext="{d:DesignInstance vmd:DesignTimeMainViewModel, IsDesignTimeCreatable=True}">
 
     <Window.Resources>

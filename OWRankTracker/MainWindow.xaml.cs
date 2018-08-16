@@ -14,7 +14,7 @@ namespace OWRankTracker
         public MainWindow()
         {
             InitializeComponent();
-            Closing += (s, e) => ViewModelLocator.Cleanup();
+            Closing += (s, e) => DependencyInjection.Container.Cleanup();
         }
 
         public override void BeginInit()

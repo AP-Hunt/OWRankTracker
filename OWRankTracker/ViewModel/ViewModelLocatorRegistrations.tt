@@ -1,0 +1,42 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(TargetDir)OWRankTracker.exe" #>
+<#@ assembly name="$(TargetDir)Galasoft.MvvmLight.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="OWRankTracker" #>
+<#@ import namespace="OWRankTracker.DependencyInjection" #>
+<#@ output extension=".cs" #>
+<#
+IEnumerable<Type> viewModelTypes =
+    from t in (typeof(MainWindow).Assembly.GetTypes())
+    where t.IsSubclassOf(typeof(GalaSoft.MvvmLight.ViewModelBase))
+    &&    !t.Name.Contains("Design")
+    select t;
+
+string containerType = typeof(Container).FullName;
+#>
+using CommonServiceLocator;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
+using OWRankTracker.Model;
+using OWRankTracker.Profile;
+using System.Collections.Generic;
+using Autofac;
+
+namespace OWRankTracker.ViewModel
+{
+    /// <summary>
+    /// This partial class contains automatically 
+    /// generated locator attributes for viewmodel types
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("T4", "x")]
+    partial class ViewModelLocator
+    {
+<# foreach(Type t in viewModelTypes) { #>
+    <# string typeFullName = t.FullName; string typeShortName = t.Name; #>
+    public <#= typeFullName #> <#= typeShortName #> => <#= containerType #>.Instance.Resolve<<#= typeFullName #>>();
+<# } #>
+    }
+}
