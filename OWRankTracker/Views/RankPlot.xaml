@@ -12,7 +12,7 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance vmd:DesignTimeRankPlotViewModel, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance vmd:DesignTimeRankPlotViewModel, IsDesignTimeCreatable=True, CreateList=True}">
     <DockPanel LastChildFill="True">
         <ItemsControl DockPanel.Dock="Top" DataContext="{Binding Settings, UpdateSourceTrigger=PropertyChanged}" d:DataContext="{x:Type vm:RankPlotSettingViewModel}">
             <ItemsControl.ItemContainerStyle>

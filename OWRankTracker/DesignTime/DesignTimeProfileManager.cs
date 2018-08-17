@@ -12,9 +12,9 @@ namespace OWRankTracker.DesignTime
     {
         private List<IProfile> _profiles = new List<IProfile>()
         {
+            new Profiles.FiveHundredMatches(),
             new Profiles.Winner(),
-            new Profiles.Loser(),
-            new Profiles.FiveHundredMatches()
+            new Profiles.Loser()
         };
 
         public IProfile ActiveProfile { get; private set; }
@@ -23,7 +23,7 @@ namespace OWRankTracker.DesignTime
 
         public DesignTimeProfileManager()
         {
-            OpenDefaultProfile(false);
+            OpenDefaultProfile();
         }
 
         public void OpenProfile(string name, bool emitMessage = true)

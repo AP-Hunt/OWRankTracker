@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OWRankTracker.Views"
              xmlns:vm="clr-namespace:OWRankTracker.ViewModel"
+             xmlns:vmd="clr-namespace:OWRankTracker.ViewModel.Design"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{x:Type vm:MatchRecordsTableViewModel}">
+             d:DataContext="{d:DesignInstance vmd:DesignTimeMatchRecordsTableViewModel, CreateList=True, IsDesignTimeCreatable=True}">
 
     <UserControl.Resources>
         <ResourceDictionary>

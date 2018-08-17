@@ -112,6 +112,10 @@
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Wpf\MessageBoxService.cs" />
+    <Compile Include="ViewModel\Design\DesignTimeMapWinRatesViewModel.cs" />
+    <Compile Include="ViewModel\Design\DesignTimeMatchRecordsTableViewModel.cs" />
+    <Compile Include="ViewModel\Design\DesignTimeProfileSelectViewModel.cs" />
+    <Compile Include="ViewModel\Design\DesignTimeRecordMatchViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModelLocatorRegistrations.cs">
       <AutoGen>True</AutoGen>
