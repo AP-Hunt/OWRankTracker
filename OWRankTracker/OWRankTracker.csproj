@@ -106,22 +106,20 @@
     <Compile Include="CSV\MatchResultTypeConverter.cs" />
     <Compile Include="CSV\MatchRecordConfiguration.cs" />
     <Compile Include="DependencyInjection\Container.cs" />
+    <Compile Include="DesignTime\DesignTimeWindowService.cs" />
     <Compile Include="Profile\IProfile.cs" />
     <Compile Include="Services\ProfileNameConflictException.cs" />
     <Compile Include="Services\Wpf\MessageBoxWindow.xaml.cs">
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\Wpf\MessageBoxService.cs" />
+    <Compile Include="Services\Wpf\WindowService.cs" />
+    <Compile Include="Services\Wpf\IWindowService.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMapWinRatesViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMatchRecordsTableViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeProfileSelectViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeRecordMatchViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="ViewModel\ViewModelLocatorRegistrations.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ViewModelLocatorRegistrations.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\Design\DesignTimeMainViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeProfileManager.cs" />
     <Compile Include="DesignTime\Profiles\FiveHundredMatches.cs" />
@@ -237,12 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ViewModel\ViewModelLocatorRegistrations.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ViewModelLocatorRegistrations.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

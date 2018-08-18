@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using OWRankTracker.Services.Wpf;
 using OWRankTracker.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ namespace OWRankTracker.Test.ViewModel
         public void OnCreation_ExposesTheNamesOfAllProfiles()
         {
             // Act
-            ProfileSelectViewModel vm = new ProfileSelectViewModel(_profileManager);
+            ProfileSelectViewModel vm = new ProfileSelectViewModel(_profileManager, Mock.Of<IWindowService>());
 
             // Assert
             CollectionAssert.Contains(vm.AllProfiles, _defaultProfile.Name);
@@ -26,7 +28,7 @@ namespace OWRankTracker.Test.ViewModel
         public void OnCreation_ExposesTheNameOfTheSelectedProfile()
         {
             // Act
-            ProfileSelectViewModel vm = new ProfileSelectViewModel(_profileManager);
+            ProfileSelectViewModel vm = new ProfileSelectViewModel(_profileManager, Mock.Of<IWindowService>());
 
             // Assert
             Assert.AreEqual(_profileManager.ActiveProfile.Name, vm.SelectedProfile);

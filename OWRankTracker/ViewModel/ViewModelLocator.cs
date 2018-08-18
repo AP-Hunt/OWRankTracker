@@ -9,6 +9,7 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using Autofac;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -27,15 +28,13 @@ namespace OWRankTracker.ViewModel
     /// </summary>
     partial class ViewModelLocator
     {
-        static ViewModelLocator()
-        {
-        }
-
-        /// <summary>
-        /// Cleans up all the resources.
-        /// </summary>
-        public static void Cleanup()
-        {
-        }
+        public MainViewModel MainViewModel                              => DependencyInjection.Container.Instance.Resolve<MainViewModel>();
+        public MapWinRatesViewModel MapWinRatesViewModel                => DependencyInjection.Container.Instance.Resolve<MapWinRatesViewModel>();
+        public MatchDataViewModelBase MatchDataViewModelBase            => DependencyInjection.Container.Instance.Resolve<MatchDataViewModelBase>();
+        public MatchRecordsTableViewModel MatchRecordsTableViewModel    => DependencyInjection.Container.Instance.Resolve<MatchRecordsTableViewModel>();
+        public ProfileSelectViewModel ProfileSelectViewModel            => DependencyInjection.Container.Instance.Resolve<ProfileSelectViewModel>();
+        public RankPlotSettingViewModel RankPlotSettingViewModel        => DependencyInjection.Container.Instance.Resolve<RankPlotSettingViewModel>();
+        public RankPlotViewModel RankPlotViewModel                      => DependencyInjection.Container.Instance.Resolve<RankPlotViewModel>();
+        public RecordMatchViewModel RecordMatchViewModel                => DependencyInjection.Container.Instance.Resolve<RecordMatchViewModel>();
     }
 }

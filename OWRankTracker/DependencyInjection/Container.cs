@@ -37,6 +37,8 @@ namespace OWRankTracker.DependencyInjection
         private static IContainer BuildContainer()
         {
             ContainerBuilder builder = new ContainerBuilder();
+            builder.Register<IContainer>((ctx) => Container.Instance).SingleInstance();
+
             RegisterMVVMTypes(builder);
             RegisterApplicationTypes(builder);
             RegisterViewModels(builder);
@@ -48,6 +50,7 @@ namespace OWRankTracker.DependencyInjection
         {
             builder.Register<IMessenger>((_) => GalaSoft.MvvmLight.Messaging.Messenger.Default).SingleInstance();
             builder.RegisterType<Services.Wpf.MessageBoxService>().AsImplementedInterfaces();
+            builder.RegisterType<Services.Wpf.WindowService>().AsImplementedInterfaces();
         }
 
         private static void RegisterApplicationTypes(ContainerBuilder builder)

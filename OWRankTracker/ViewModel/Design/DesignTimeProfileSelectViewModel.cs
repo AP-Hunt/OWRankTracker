@@ -9,7 +9,10 @@ namespace OWRankTracker.ViewModel.Design
 {
     class DesignTimeProfileSelectViewModel : ProfileSelectViewModel
     {
-        public DesignTimeProfileSelectViewModel() : base(new DesignTime.DesignTimeProfileManager())
+        public DesignTimeProfileSelectViewModel() 
+        : base(
+            new DesignTime.DesignTimeProfileManager(), 
+            new DesignTime.DesignTimeWindowService())
         {
         }
     }

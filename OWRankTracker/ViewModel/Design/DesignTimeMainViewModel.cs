@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Views;
 using OWRankTracker.DesignTime;
 using OWRankTracker.Services;
+using OWRankTracker.Services.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,13 @@ namespace OWRankTracker.ViewModel.Design
     {
         private static IProfileManager _profileManager;
         private static IDialogService _dialogService;
+        private static IWindowService _windowService;
 
         static DesignTimeMainViewModel()
         {
             _profileManager = new DesignTimeProfileManager();
             _dialogService = new Services.Wpf.MessageBoxService();
+            _windowService = new DesignTimeWindowService();
         }
 
         public DesignTimeMainViewModel()
@@ -28,7 +31,7 @@ namespace OWRankTracker.ViewModel.Design
             new ViewModel.MatchRecordsTableViewModel(_profileManager),
             new ViewModel.RankPlotViewModel(_profileManager),
             new ViewModel.MapWinRatesViewModel(_profileManager),
-            new ViewModel.ProfileSelectViewModel(_profileManager)
+            new ViewModel.ProfileSelectViewModel(_profileManager, _windowService)
         )
         {
         }
