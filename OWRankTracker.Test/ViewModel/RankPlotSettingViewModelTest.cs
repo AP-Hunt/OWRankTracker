@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OWRankTracker.Profile;
+using OWRankTracker.Core.Profile;
 using OWRankTracker.ViewModel;
 using System;
 using System.Collections.Generic;

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OWRankTracker.Model;
-using OWRankTracker.MatchHistory;
-using OWRankTracker.Profile;
+﻿using OWRankTracker.Core.MatchHistory;
+using OWRankTracker.Core.Profile;
 
 namespace OWRankTracker.DesignTime.Profiles
 {

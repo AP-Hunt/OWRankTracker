@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using OWRankTracker.Services;
+using OWRankTracker.Core.Services;
 using OWRankTracker.Services.Wpf;
 using System;
 using System.Collections.Generic;

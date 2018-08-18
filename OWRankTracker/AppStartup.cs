@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
-using OWRankTracker.Services;
+using OWRankTracker.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,11 +1,9 @@
-﻿using OWRankTracker.Model;
-using OWRankTracker.MatchHistory;
+﻿using OWRankTracker.Core.MatchHistory;
+using OWRankTracker.Core.Model;
+using OWRankTracker.Core.Profile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OWRankTracker.Profile;
 
 namespace OWRankTracker.DesignTime.Profiles
 {
@@ -23,7 +21,7 @@ namespace OWRankTracker.DesignTime.Profiles
         private static IEnumerable<MatchRecord> GetRecords()
         {
             DateTime now = new DateTime();
-            var matchOne = new Model.MatchRecord()
+            var matchOne = new MatchRecord()
             {
                 CR = 1000,
                 Date = new DateTime(),
@@ -35,7 +33,7 @@ namespace OWRankTracker.DesignTime.Profiles
             var matchTwo = matchOne.NewRelativeRecord(975, now.AddMinutes(30), Maps.All.ElementAt(1));
             var matchThree = matchTwo.NewRelativeRecord(950, now.AddMinutes(60), Maps.All.ElementAt(2));
 
-            return new List<Model.MatchRecord>()
+            return new List<MatchRecord>()
             {
                 matchOne,
                 matchTwo,

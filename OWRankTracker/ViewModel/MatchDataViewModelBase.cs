@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using OWRankTracker.Messages;
-using OWRankTracker.MatchHistory;
-using OWRankTracker.Services;
+using OWRankTracker.Core.MatchHistory;
+using OWRankTracker.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OWRankTracker.Profile;
+using OWRankTracker.Core.Profile;
 
 namespace OWRankTracker.ViewModel
 {

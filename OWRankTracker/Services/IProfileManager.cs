@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using OWRankTracker.MatchHistory;
-using OWRankTracker.Profile;
+using OWRankTracker.Core.MatchHistory;
+using OWRankTracker.Core.Profile;
 
-namespace OWRankTracker.Services
+namespace OWRankTracker.Core.Services
 {
     public interface IProfileManager
     {

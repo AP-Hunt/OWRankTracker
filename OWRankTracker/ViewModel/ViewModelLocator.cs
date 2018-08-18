@@ -10,12 +10,6 @@
 */
 
 using Autofac;
-using CommonServiceLocator;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using OWRankTracker.Model;
-using OWRankTracker.Profile;
-using System.Collections.Generic;
 
 namespace OWRankTracker.ViewModel
 {

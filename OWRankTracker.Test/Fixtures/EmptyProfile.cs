@@ -1,5 +1,5 @@
-﻿using OWRankTracker.MatchHistory;
-using OWRankTracker.Profile;
+﻿using OWRankTracker.Core.MatchHistory;
+using OWRankTracker.Core.Profile;
 using System;
 using System.Collections.Generic;
 using System.Linq;

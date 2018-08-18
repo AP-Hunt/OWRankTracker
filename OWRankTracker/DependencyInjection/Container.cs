@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Autofac;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
-using OWRankTracker.Profile;
-using OWRankTracker.Services.Storage;
+using OWRankTracker.Core.Profile;
+using OWRankTracker.Core.Services.Storage;
 
 namespace OWRankTracker.DependencyInjection
 {
@@ -57,7 +57,7 @@ namespace OWRankTracker.DependencyInjection
         {
             IProfileStorage profileStorage;
 #if DEBUG
-            profileStorage = new Services.Storage.InMemoryProfileStorage(new List<IProfile>()
+            profileStorage = new Core.Services.Storage.InMemoryProfileStorage(new List<IProfile>()
                 {
                     new DesignTime.Profiles.Empty("Default"),
                     new DesignTime.Profiles.Loser(),
@@ -65,10 +65,10 @@ namespace OWRankTracker.DependencyInjection
                     new DesignTime.Profiles.FiveHundredMatches()
                 });
 #else
-            profileStorage = new Services.Storage.FileSystemProfileStorage();
+            profileStorage = new FileSystemProfileStorage();
 #endif
             builder.Register<IProfileStorage>((_) => profileStorage).SingleInstance();
-            builder.RegisterType<Services.ProfileManager>().AsSelf().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<Core.Services.ProfileManager>().AsSelf().AsImplementedInterfaces().SingleInstance();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)

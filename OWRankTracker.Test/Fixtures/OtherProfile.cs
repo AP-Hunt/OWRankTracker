@@ -1,6 +1,6 @@
-﻿using OWRankTracker.MatchHistory;
-using OWRankTracker.Model;
-using OWRankTracker.Profile;
+﻿using OWRankTracker.Core.MatchHistory;
+using OWRankTracker.Core.Model;
+using OWRankTracker.Core.Profile;
 using OWRankTracker.Test.Fakers;
 using System.Collections.Generic;
 using System.Linq;

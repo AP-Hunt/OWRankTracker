@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OWRankTracker.Model;
-using OWRankTracker.Profile;
-using OWRankTracker.Services;
+using OWRankTracker.Core.Model;
+using OWRankTracker.Core.Profile;
+using OWRankTracker.Core.Services;
 using OWRankTracker.Test.Fakers;
 using OWRankTracker.ViewModel;
 

@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using OWRankTracker.DesignTime;
-using OWRankTracker.Services;
+using OWRankTracker.Core.Services;
 using OWRankTracker.Services.Wpf;
 using System;
 using System.Collections.Generic;

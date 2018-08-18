@@ -1,9 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using OWRankTracker.Profile;
-using OWRankTracker.Services;
-using OWRankTracker.Services.Storage;
+using OWRankTracker.Core.Profile;
+using OWRankTracker.Core.Services;
+using OWRankTracker.Core.Services.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;

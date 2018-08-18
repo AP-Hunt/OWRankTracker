@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWRankTracker", "OWRankTrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWRankTracker.Test", "OWRankTracker.Test\OWRankTracker.Test.csproj", "{516D9931-F128-4A1E-83DF-0CBA48A111FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWRankTracker.Core", "OWRankTracker.Core\OWRankTracker.Core.csproj", "{B15F6D6F-43FA-43F2-A918-9AD1DFF51CD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWRankTracker.Core.Test", "OWRankTracker.Core.Test\OWRankTracker.Core.Test.csproj", "{49258E9D-8BE3-4F6A-88A3-2AB2747FCA0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWRankTracker.Test.Fakers", "OWRankTracker.Test.Fakers\OWRankTracker.Test.Fakers.csproj", "{B7CA3375-9F2F-4102-9278-B7C6C282F7F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{516D9931-F128-4A1E-83DF-0CBA48A111FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{516D9931-F128-4A1E-83DF-0CBA48A111FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{516D9931-F128-4A1E-83DF-0CBA48A111FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B15F6D6F-43FA-43F2-A918-9AD1DFF51CD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B15F6D6F-43FA-43F2-A918-9AD1DFF51CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B15F6D6F-43FA-43F2-A918-9AD1DFF51CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B15F6D6F-43FA-43F2-A918-9AD1DFF51CD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49258E9D-8BE3-4F6A-88A3-2AB2747FCA0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49258E9D-8BE3-4F6A-88A3-2AB2747FCA0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49258E9D-8BE3-4F6A-88A3-2AB2747FCA0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49258E9D-8BE3-4F6A-88A3-2AB2747FCA0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7CA3375-9F2F-4102-9278-B7C6C282F7F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CA3375-9F2F-4102-9278-B7C6C282F7F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CA3375-9F2F-4102-9278-B7C6C282F7F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CA3375-9F2F-4102-9278-B7C6C282F7F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

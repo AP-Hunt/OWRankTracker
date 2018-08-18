@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using OWRankTracker.Model;
+using OWRankTracker.Core.Model;
 using OWRankTracker.ViewModel;
 using System;
 using System.Collections.Generic;

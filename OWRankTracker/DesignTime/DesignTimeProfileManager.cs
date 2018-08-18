@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OWRankTracker.MatchHistory;
-using OWRankTracker.Profile;
+using OWRankTracker.Core.MatchHistory;
+using OWRankTracker.Core.Profile;
 
 namespace OWRankTracker.DesignTime
 {
-    class DesignTimeProfileManager : Services.IProfileManager
+    class DesignTimeProfileManager : Core.Services.IProfileManager
     {
         private List<IProfile> _profiles = new List<IProfile>()
         {

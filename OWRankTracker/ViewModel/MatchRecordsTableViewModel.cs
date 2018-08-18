@@ -1,25 +1,21 @@
-﻿using GalaSoft.MvvmLight;
+﻿using OWRankTracker.Core.Model;
+using OWRankTracker.Core.Services;
 using OWRankTracker.Messages;
-using OWRankTracker.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OWRankTracker.ViewModel
 {
     class MatchRecordsTableViewModel : MatchDataViewModelBase
     {
-        private ObservableCollection<Model.MatchRecord> _records;
-        public ObservableCollection<Model.MatchRecord> Records
+        private ObservableCollection<MatchRecord> _records;
+        public ObservableCollection<MatchRecord> Records
         {
             get
             {
                 if (_records == null)
                 {
-                    _records = new ObservableCollection<Model.MatchRecord>(
+                    _records = new ObservableCollection<MatchRecord>(
                         MatchHistory.OrderByDescending(r => r.Date)
                     );
                 }
@@ -53,14 +49,14 @@ namespace OWRankTracker.ViewModel
 
         protected override void ActiveProfileChanged()
         {
-            Records = new ObservableCollection<Model.MatchRecord>(
+            Records = new ObservableCollection<MatchRecord>(
                 MatchHistory.OrderByDescending(r => r.Date)
             );
         }
 
         private void OnNewRecord(NewMatchRecord message)
         {
-            Records = new ObservableCollection<Model.MatchRecord>(
+            Records = new ObservableCollection<MatchRecord>(
                 MatchHistory.OrderByDescending(r => r.Date)
             );
         }

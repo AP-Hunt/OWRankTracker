@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
-using OWRankTracker.Services;
+using OWRankTracker.Core.Model;
+using OWRankTracker.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace OWRankTracker.ViewModel
             }
         }
 
-        private string[] _maps = Model.Maps.All;
+        private string[] _maps = Core.Model.Maps.All;
         public string[] Maps
         {
             get { return _maps; }
@@ -52,7 +53,7 @@ namespace OWRankTracker.ViewModel
         {
             var lastMatch = MatchHistory.LastMatch;
 
-            Model.MatchRecord newMatch;
+            MatchRecord newMatch;
             if (lastMatch != null)
             {
                 newMatch = lastMatch.NewRelativeRecord(CR.Value, DateTime.Now, SelectedMap);
@@ -60,13 +61,13 @@ namespace OWRankTracker.ViewModel
             else
             {
                 await _dialogService.ShowMessage("Recording first game as a win, because there are no previous records to base it on", "Recording new match");
-                newMatch = new Model.MatchRecord()
+                newMatch = new MatchRecord()
                 { 
                     CR = CR.Value,
                     Diff = CR.Value,
                     Date = DateTime.Now,
                     Map = SelectedMap,
-                    Result = Model.MatchResult.WIN
+                    Result = MatchResult.WIN
                 };
             }
 

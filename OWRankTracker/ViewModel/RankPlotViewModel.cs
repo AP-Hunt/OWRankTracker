@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using GalaSoft.MvvmLight;
-using LiveCharts;
-using LiveCharts.Helpers;
+﻿using LiveCharts;
 using LiveCharts.Wpf;
 using MoreLinq;
+using OWRankTracker.Core.Model;
+using OWRankTracker.Core.Services;
 using OWRankTracker.Messages;
-using OWRankTracker.Model;
-using OWRankTracker.Services;
+using System;
+using System.Linq;
+using System.Windows.Media;
 
 namespace OWRankTracker.ViewModel
 {
@@ -146,7 +141,7 @@ namespace OWRankTracker.ViewModel
             YAxisStartValue = matchesInDateRange.FirstOrDefault()?.CR ?? 0;
         }
 
-        private bool Between(Model.MatchRecord record, DateTime start, DateTime end)
+        private bool Between(MatchRecord record, DateTime start, DateTime end)
         {
             return record.Date >= start && record.Date <= end;
         }

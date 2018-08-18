@@ -20,6 +20,7 @@ test:
     assemblies:
         only:
             - OWRankTracker.Test\bin\$(configuration)\OWRankTracker.Test.dll
+            - OWRankTracker.Core.Test\bin\$(Configuration)\OWRankTracker.Core.Test.dll
 
 artifacts:
     - path: OWRankTracker\bin\$(configuration)

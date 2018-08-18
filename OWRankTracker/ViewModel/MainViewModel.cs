@@ -1,6 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using OWRankTracker.Model;
-using OWRankTracker.Services;
+﻿using OWRankTracker.Core.Services;
 
 namespace OWRankTracker.ViewModel
 {

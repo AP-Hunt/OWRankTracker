@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OWRankTracker.Profile;
-using OWRankTracker.Services;
+using OWRankTracker.Core.Profile;
+using OWRankTracker.Core.Services;
 using OWRankTracker.Test.Fakers;
 using System;
 using System.Collections.Generic;

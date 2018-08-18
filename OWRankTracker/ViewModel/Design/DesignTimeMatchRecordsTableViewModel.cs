@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OWRankTracker.Services;
+using OWRankTracker.Core.Services;
 
 namespace OWRankTracker.ViewModel.Design
 {
