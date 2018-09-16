@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace OWRankTracker.Core.Services
+namespace OWRankTracker.Services
 {
-    public class ProfileNameConflictException : Exception
+    internal class ProfileNameConflictException : Exception
     {
-        public ProfileNameConflictException(string message) : base($"Profile with name '${message}' already exists")
+        public ProfileNameConflictException(string profileName) : base($"A profile with the name '{profileName}' already exists")
         {
         }
     }

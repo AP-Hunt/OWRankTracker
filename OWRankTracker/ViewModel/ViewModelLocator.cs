@@ -30,5 +30,6 @@ namespace OWRankTracker.ViewModel
         public RankPlotSettingViewModel RankPlotSettingViewModel        => DependencyInjection.Container.Instance.Resolve<RankPlotSettingViewModel>();
         public RankPlotViewModel RankPlotViewModel                      => DependencyInjection.Container.Instance.Resolve<RankPlotViewModel>();
         public RecordMatchViewModel RecordMatchViewModel                => DependencyInjection.Container.Instance.Resolve<RecordMatchViewModel>();
+        public ManageProfilesViewModel ManageProfilesViewModel          => DependencyInjection.Container.Instance.Resolve<ManageProfilesViewModel>();
     }
 }

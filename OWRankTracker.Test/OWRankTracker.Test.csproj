@@ -126,6 +126,7 @@
     <Compile Include="Services\ProfileManagerTest.cs" />
     <Compile Include="Services\Wpf\FakeWindow.cs" />
     <Compile Include="Services\Wpf\WindowServiceTest.cs" />
+    <Compile Include="ViewModel\ManageProfilesViewModelTest.cs" />
     <Compile Include="ViewModel\MapWinRatesViewModelTest.cs" />
     <Compile Include="ViewModel\MatchRecordsTableViewModelTest.cs" />
     <Compile Include="ViewModel\ProfileSelectViewModelTest.cs" />

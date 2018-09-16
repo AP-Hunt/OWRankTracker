@@ -43,5 +43,10 @@ namespace OWRankTracker.DesignTime
         {
             OpenProfile(_profiles.First().Name, emitMessage);
         }
+
+        public IProfile Create(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

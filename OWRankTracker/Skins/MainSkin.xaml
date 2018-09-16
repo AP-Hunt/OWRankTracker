@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework">
+    <Style TargetType="FrameworkElement" x:Key="WrapperElement">
+        <Setter Property="Margin" Value="3" />
+    </Style>
+
     <Style TargetType="Label">
         <Setter Property="Margin" Value="5,5" />
     </Style>

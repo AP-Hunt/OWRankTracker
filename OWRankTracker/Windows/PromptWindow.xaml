@@ -1,0 +1,38 @@
+﻿<Window x:Class="OWRankTracker.Windows.PromptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OWRankTracker.Windows"
+        mc:Ignorable="d"
+        Title="{Binding Title}"
+        MinWidth="300"
+        SizeToContent="WidthAndHeight"
+        d:DataContext="{d:DesignInstance {x:Type local:PromptWindow}, IsDesignTimeCreatable=True}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel>
+        <Label Content="{Binding Prompt}"></Label>
+        <TextBox 
+            x:Name="tbInput" 
+            Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+            HorizontalAlignment="Stretch"
+        >
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        <!-- Placeholder for the TextBox itself -->
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <Button Click="OK_Click" HorizontalAlignment="Right" Width="50">OK</Button>
+    </StackPanel>
+</Window>

@@ -39,6 +39,19 @@ namespace OWRankTracker.Test.Services.Storage
         }
 
         [TestMethod]
+        public void Exists_IsCaseInsensitive()
+        {
+            // Arrange
+            FileSystemProfileStorage storage = new FileSystemProfileStorage(_fileSystem);
+
+            // Act
+            bool actual = storage.Exists("DEfault");
+
+            // Assert
+            Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
         public void Create_CreatesNewCSV_WithTheNameOfTheProfile()
         {
             // Arrange

@@ -42,6 +42,7 @@ namespace OWRankTracker.DependencyInjection
             RegisterMVVMTypes(builder);
             RegisterApplicationTypes(builder);
             RegisterViewModels(builder);
+            RegisterWindowTypes(builder);
 
             return builder.Build();
         }
@@ -79,6 +80,11 @@ namespace OWRankTracker.DependencyInjection
                        t.IsSubclassOf(typeof(GalaSoft.MvvmLight.ViewModelBase))
                     && !t.Name.Contains("Design")
                 );
+        }
+
+        private static void RegisterWindowTypes(ContainerBuilder builder)
+        {
+            builder.RegisterType<Windows.ManageProfilesWindow>().AsSelf();
         }
     }
 }

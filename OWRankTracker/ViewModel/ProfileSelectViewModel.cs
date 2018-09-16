@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using OWRankTracker.Core.Services;
+using OWRankTracker.Messages;
 using OWRankTracker.Services.Wpf;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,13 @@ namespace OWRankTracker.ViewModel
 
             AllProfiles = new ObservableCollection<string>(_profileManager.Profiles.Select(p => p.Name));
             _selectedProfile = AllProfiles.First();
+
+            MessengerInstance.Register<Messages.NewProfile>(this, OnNewProfile);
+        }
+
+        private void OnNewProfile(NewProfile msg)
+        {
+            AllProfiles.Add(msg.Profile.Name);
         }
 
         private void ProfileChanged(string name)
@@ -46,7 +54,7 @@ namespace OWRankTracker.ViewModel
 
         private void OpenManageProfilesWindow()
         {
-            throw new NotImplementedException("Not implemented yet");
+            _windowService.ShowWindow<Windows.ManageProfilesWindow>();
         }
     }
 }

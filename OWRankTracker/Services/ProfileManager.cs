@@ -41,6 +41,7 @@ namespace OWRankTracker.Core.Services
             OpenProfile(profileName, emitMessage);
         }
 
+        /// <inheritdoc />
         public void OpenProfile(string name, bool emitMessage = true)
         {
             if (!_profileStorage.Exists(name))
@@ -57,6 +58,19 @@ namespace OWRankTracker.Core.Services
             }
         }
 
+        /// <inheritdoc />
+        public IProfile Create(string name)
+        {
+            if (_profileStorage.Exists(name))
+            {
+                throw new ProfileNameConflictException(name);
+            }
+
+            IProfile newProfile = _profileStorage.Create(name);
+            _messenger.Send(new Messages.NewProfile(newProfile));
+            return newProfile;
+        }
+
         private void EnsureDefaultProfileExistsIfNeeded()
         {
             if(_profileStorage.Count() == 0)
@@ -69,5 +83,6 @@ namespace OWRankTracker.Core.Services
         {
             OpenProfile(_profileStorage.First().Name);
         }
+
     }
 }

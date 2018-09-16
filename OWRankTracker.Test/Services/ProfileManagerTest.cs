@@ -116,5 +116,52 @@ namespace OWRankTracker.Test.Services
                 )
             );
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ProfileNameConflictException))]
+        public void Create_ThrowsException_IfProfileWithThatNameAlreadyExists()
+        {
+            // Arrange
+            ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
+            string name = "Default";
+
+            // Act
+            manager.Create(name);
+        }
+
+        [TestMethod]
+        public void Create_ReturnsANewProfileInstance_ForTheNewProfile()
+        {
+            // Arrange
+            ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
+            string name = "Foo";
+
+            // Act
+            IProfile profile = manager.Create(name);
+
+            // Assert
+            Assert.IsNotNull(profile);
+            CollectionAssert.Contains(manager.Profiles.ToList(), profile);
+            Assert.AreEqual(name, profile.Name);
+        }
+
+        [TestMethod]
+        public void Create_EmitsNewProfileMessage()
+        {
+            // Arrange
+            ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
+
+            // Act
+            IProfile profile = manager.Create("foo");
+
+            // Assert
+            _messenger.Verify(m => 
+                m.Send(
+                    It.Is<Messages.NewProfile>(
+                        msg => msg.Profile == profile
+                    )
+                )
+            );
+        }
     }
 }

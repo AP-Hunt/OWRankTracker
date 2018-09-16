@@ -1,0 +1,32 @@
+﻿<Window x:Class="OWRankTracker.Windows.ManageProfilesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vmd="clr-namespace:OWRankTracker.ViewModel.Design"
+        xmlns:local="clr-namespace:OWRankTracker.Windows"
+        mc:Ignorable="d"
+        Title="Manage Profiles"
+        SizeToContent="WidthAndHeight"
+        DataContext="{Binding ManageProfilesViewModel, Source={StaticResource Locator}}"
+        d:DataContext="{d:DesignInstance vmd:DesignTimeManageProfilesViewModel, IsDesignTimeCreatable=True, CreateList=True}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel Style="{StaticResource WrapperElement}">
+        <ListView
+            DockPanel.Dock="Left"
+            ItemsSource="{Binding Profiles}"
+        >
+        </ListView>
+
+        <StackPanel>
+            <Button Click="Button_Click">Add</Button>
+        </StackPanel>
+    </DockPanel>
+</Window>

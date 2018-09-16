@@ -105,6 +105,7 @@
     <Compile Include="AppStartup.cs" />
     <Compile Include="DependencyInjection\Container.cs" />
     <Compile Include="DesignTime\DesignTimeWindowService.cs" />
+    <Compile Include="Messages\NewProfile.cs" />
     <Compile Include="Services\ProfileNameConflictException.cs" />
     <Compile Include="Services\Wpf\MessageBoxWindow.xaml.cs">
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
@@ -112,10 +113,12 @@
     <Compile Include="Services\Wpf\MessageBoxService.cs" />
     <Compile Include="Services\Wpf\WindowService.cs" />
     <Compile Include="Services\Wpf\IWindowService.cs" />
+    <Compile Include="ViewModel\Design\DesignTimeManageProfilesViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMapWinRatesViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMatchRecordsTableViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeProfileSelectViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeRecordMatchViewModel.cs" />
+    <Compile Include="ViewModel\ManageProfilesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMainViewModel.cs" />
     <Compile Include="DesignTime\DesignTimeProfileManager.cs" />
@@ -151,6 +154,12 @@
     </Compile>
     <Compile Include="Views\RecordMatchView.xaml.cs">
       <DependentUpon>RecordMatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ManageProfilesWindow.xaml.cs">
+      <DependentUpon>ManageProfilesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PromptWindow.xaml.cs">
+      <DependentUpon>PromptWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -189,6 +198,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RecordMatchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ManageProfilesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PromptWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

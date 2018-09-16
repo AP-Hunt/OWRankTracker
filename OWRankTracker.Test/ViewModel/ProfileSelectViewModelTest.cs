@@ -1,5 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using OWRankTracker.Core.Profile;
 using OWRankTracker.Services.Wpf;
 using OWRankTracker.ViewModel;
 using System;
@@ -32,6 +34,24 @@ namespace OWRankTracker.Test.ViewModel
 
             // Assert
             Assert.AreEqual(_profileManager.ActiveProfile.Name, vm.SelectedProfile);
+        }
+
+        [TestMethod]
+        public void OnNewProfile_AddsProfileNameToExposedProfiles()
+        {
+            // Arrange
+            Mock<IProfile> profile = new Mock<IProfile>();
+            string name = "Profile";
+            profile.SetupGet(p => p.Name).Returns(name);
+
+            Messages.NewProfile msg = new Messages.NewProfile(profile.Object);
+
+            // Act
+            ProfileSelectViewModel vm = new ProfileSelectViewModel(_profileManager, Mock.Of<IWindowService>());
+            Messenger.Default.Send(msg);
+
+            // Assert
+            CollectionAssert.Contains(vm.AllProfiles, name);
         }
     }
 }
