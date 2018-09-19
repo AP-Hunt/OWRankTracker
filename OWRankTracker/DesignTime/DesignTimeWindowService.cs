@@ -15,5 +15,11 @@ namespace OWRankTracker.DesignTime
             // No op
             return null;
         }
+
+        public TWindow ShowWindow<TWindow>(Window owner) where TWindow : Window
+        {
+            // No op
+            return null;
+        }
     }
 }

@@ -18,7 +18,6 @@ namespace OWRankTracker.ViewModel
         private readonly IWindowService _windowService;
 
         public ObservableCollection<string> AllProfiles { get; set; }
-        public RelayCommand ManageProfilesCommand => new RelayCommand(OpenManageProfilesWindow);
 
         private string _selectedProfile;
         public string SelectedProfile
@@ -50,11 +49,6 @@ namespace OWRankTracker.ViewModel
         private void ProfileChanged(string name)
         {
             _profileManager.OpenProfile(name);
-        }
-
-        private void OpenManageProfilesWindow()
-        {
-            _windowService.ShowWindow<Windows.ManageProfilesWindow>();
         }
     }
 }

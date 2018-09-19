@@ -64,5 +64,27 @@ namespace OWRankTracker.Test.Services.Wpf
             // Assert
             Assert.IsTrue(actual.IsVisible);
         }
+
+        [TestMethod]
+        public void ShowWindow_WithOwner_SetsTheArgumentAsTheOwnerOfTheResolvedWindow()
+        {
+            // Arrange
+            FakeWindow window = new FakeWindow();
+            FakeWindow parent = new FakeWindow();
+
+            parent.Show(); // A parent window must be shown
+
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterInstance(window);
+            IContainer container = builder.Build();
+
+            OWRankTracker.Services.Wpf.WindowService service = new OWRankTracker.Services.Wpf.WindowService(container);
+
+            // Act
+            FakeWindow actual = service.ShowWindow<FakeWindow>(parent);
+
+            // Assert
+            Assert.AreEqual(actual.Owner, parent);
+        }
     }
 }

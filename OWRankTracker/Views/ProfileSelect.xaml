@@ -19,7 +19,7 @@
 
     <StackPanel>
         <Label HorizontalAlignment="Stretch">Profile</Label>
-        <Button Command="{Binding ManageProfilesCommand}">Manage</Button>
+        <Button Click="OnProfileManageClick">Manage</Button>
         <ComboBox ItemsSource="{Binding AllProfiles}" SelectedItem="{Binding SelectedProfile, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
     </StackPanel>
 </UserControl>

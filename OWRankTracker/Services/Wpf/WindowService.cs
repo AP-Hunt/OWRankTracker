@@ -20,13 +20,24 @@ namespace OWRankTracker.Services.Wpf
 
         public TWindow ShowWindow<TWindow>() where TWindow : Window
         {
+            return ShowWindow<TWindow>((Window)null);
+        }
+
+        public TWindow ShowWindow<TWindow>(Window owner) where TWindow : Window
+        {
             try
             {
                 TWindow window = _container.Resolve<TWindow>();
+
+                if (owner != null)
+                {
+                    window.Owner = owner;
+                }
+
                 window.Show();
                 return window;
             }
-            catch(Autofac.Core.Registration.ComponentNotRegisteredException ex)
+            catch (Autofac.Core.Registration.ComponentNotRegisteredException ex)
             {
                 throw new ArgumentOutOfRangeException($"Cannot resolve window of type {typeof(TWindow).FullName}", ex);
             }

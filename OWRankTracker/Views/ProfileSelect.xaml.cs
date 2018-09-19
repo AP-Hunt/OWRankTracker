@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using OWRankTracker.Services.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,25 @@ namespace OWRankTracker.Views
     /// </summary>
     public partial class ProfileSelect : UserControl
     {
+        private Windows.ManageProfilesWindow _manageProfilesWindow;
+        private IWindowService _windowService;
+
         public ProfileSelect()
         {
             InitializeComponent();
+            _windowService = DependencyInjection.Container.Instance.Resolve<IWindowService>();
+        }
+
+        private void OnProfileManageClick(object sender, RoutedEventArgs evt)
+        {
+            if (_manageProfilesWindow == null)
+            {
+                _manageProfilesWindow = _windowService.ShowWindow<Windows.ManageProfilesWindow>(Window.GetWindow(this));
+                _manageProfilesWindow.Closed += (_, __) =>
+                {
+                    _manageProfilesWindow = null;
+                };
+            }
         }
     }
 }
