@@ -32,22 +32,10 @@ namespace OWRankTracker.Test.Services
         {
             // Act
             ProfileManager manager = new ProfileManager(_profileStorage, _messenger.Object);
+            manager.OpenDefaultProfile(emitMessage: false);
 
             // Assert
             Assert.AreEqual(_defaultProfile, manager.ActiveProfile);
-        }
-
-        [TestMethod]
-        public void OnCreation_IfProfileStorageIsEmpty_ProfielManagerCreatesDefaultProfile()
-        {
-            // Arrange
-            var emptyStorage = new InMemoryProfileStorage();
-
-            // Act
-            new ProfileManager(emptyStorage, _messenger.Object);
-
-            // Assert
-            emptyStorage.Exists("Default");
         }
 
         [TestMethod]

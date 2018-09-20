@@ -24,7 +24,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS DEBUG DEBUG_PROFILES</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -40,6 +40,17 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Skins\Resources\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug[new user]|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug[new user]\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS DEBUG DEBUG_NEW_USER</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -109,6 +120,7 @@
     <Compile Include="DependencyInjection\Container.cs" />
     <Compile Include="DesignTime\DesignTimeWindowService.cs" />
     <Compile Include="Messages\NewProfile.cs" />
+    <Compile Include="Messages\UI\RequestDefaultProfileName.cs" />
     <Compile Include="Services\ProfileNameConflictException.cs" />
     <Compile Include="Services\Wpf\MessageBoxWindow.xaml.cs">
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
@@ -116,6 +128,7 @@
     <Compile Include="Services\Wpf\MessageBoxService.cs" />
     <Compile Include="Services\Wpf\WindowService.cs" />
     <Compile Include="Services\Wpf\IWindowService.cs" />
+    <Compile Include="Validation\IProfileNameValidator.cs" />
     <Compile Include="ViewModel\Design\DesignTimeManageProfilesViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMapWinRatesViewModel.cs" />
     <Compile Include="ViewModel\Design\DesignTimeMatchRecordsTableViewModel.cs" />

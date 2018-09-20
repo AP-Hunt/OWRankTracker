@@ -1,5 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using Autofac;
+using GalaSoft.MvvmLight.Messaging;
+using OWRankTracker.Services.Wpf;
+using OWRankTracker.Validation;
 using OWRankTracker.ViewModel;
+using OWRankTracker.Windows;
 
 namespace OWRankTracker
 {

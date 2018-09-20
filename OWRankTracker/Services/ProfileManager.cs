@@ -1,11 +1,12 @@
 ﻿using OWRankTracker.Core.Profile;
+using OWRankTracker.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OWRankTracker.Core.Services
 {
-    class ProfileManager : IProfileManager
+    class ProfileManager : IProfileManager, Validation.IProfileNameValidator
     {
         private static string DEFAULT_PROFILE_NAME = "Default";
         private readonly Storage.IProfileStorage _profileStorage;
@@ -21,9 +22,6 @@ namespace OWRankTracker.Core.Services
         ){
             _profileStorage = profileStorage;
             _messenger = messenger;
-
-            EnsureDefaultProfileExistsIfNeeded();
-            OpenInitialProfile();
         }
 
         /// <summary>
@@ -71,18 +69,14 @@ namespace OWRankTracker.Core.Services
             return newProfile;
         }
 
-        private void EnsureDefaultProfileExistsIfNeeded()
+        bool IProfileNameValidator.Validate(string profileName)
         {
-            if(_profileStorage.Count() == 0)
+            if(Profiles.Any(p => p.Name.Equals(profileName, StringComparison.CurrentCultureIgnoreCase)))
             {
-                _profileStorage.Create(DEFAULT_PROFILE_NAME);
+                return false;
             }
-        }
 
-        private void OpenInitialProfile()
-        {
-            OpenProfile(_profileStorage.First().Name);
+            return true;
         }
-
     }
 }

@@ -57,7 +57,8 @@ namespace OWRankTracker.DependencyInjection
         private static void RegisterApplicationTypes(ContainerBuilder builder)
         {
             IProfileStorage profileStorage;
-#if DEBUG
+#if DEBUG_PROFILES
+            // Debug configruation with existing profiles
             profileStorage = new Core.Services.Storage.InMemoryProfileStorage(new List<IProfile>()
                 {
                     new DesignTime.Profiles.Empty("Default"),
@@ -65,6 +66,9 @@ namespace OWRankTracker.DependencyInjection
                     new DesignTime.Profiles.Winner(),
                     new DesignTime.Profiles.FiveHundredMatches()
                 });
+#elif DEBUG_NEW_USER
+            // Debug configuration with no profiles (new user)
+            profileStorage = new Core.Services.Storage.InMemoryProfileStorage();
 #else
             profileStorage = new FileSystemProfileStorage();
 #endif
