@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Overwatch Rank Tracker" Language="1033" Version="1.0.0.0" Manufacturer="Andy Hunt" UpgradeCode="ee5c2cc8-24c9-4fbb-9fb9-362cc7244e27">
+		<Package 
+            Id="*" 
+            InstallerVersion="200" 
+            Compressed="yes" 
+            InstallScope="perMachine"
+            Keywords="Installer" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of Overwatch Rank Tracker is already installed." />
+
+        <Media Id="1" Cabinet="OWRankTracker.cab" EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="Overwatch Rank Tracker" Level="1">
+			<ComponentGroupRef Id="ProductFilesComponentGroup" />
+            <ComponentRef Id="ProgramMenuDirComponent" />
+            <ComponentRef Id="StartMenuShortcutComponent" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="OverwatchRankTracker" />
+			</Directory>
+
+            <Directory Id="ProgramMenuFolder" Name="Programs">
+                <Directory Id="ApplicationProgramsFolder" Name="Overwatch Rank Tracker">
+                    <Component Id="ProgramMenuDirComponent" Guid="0A49B53E-9CF5-4C1F-A033-15F5CC0FD039">
+                        <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+                        <RegistryValue Root="HKCU" Key="Software\OWRankTracker" Type="integer" Value="1" Name="installed" KeyPath="yes" />
+                    </Component>
+                </Directory>
+            </Directory>
+		</Directory>
+	</Fragment>
+        
+	<Fragment>
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="StartMenuShortcutComponent" Guid="F858978B-65E3-4E6E-A457-CBD782B38E9F">
+                <Shortcut Id="StartMenuShortcut"
+                    Directory="ApplicationProgramsFolder"
+                    Name="Overwatch Rank Tracker"
+                    Target="[INSTALLFOLDER]OWRankTracker.exe"
+                    WorkingDirectory="INSTALLFOLDER"
+                    Icon="OWRankTracker.exe.ico"
+                >
+                    <Icon Id="OWRankTracker.exe.ico" SourceFile="$(var.OWRankTracker.TargetDir)\OWRankTracker.exe" />
+                </Shortcut>
+                <RegistryValue Root="HKCU" Key="Software\OWRankTracker" Type="integer" Value="1" Name="shortcut_installed" KeyPath="yes" />
+            </Component>
+        </DirectoryRef>
+	</Fragment>
+</Wix>
