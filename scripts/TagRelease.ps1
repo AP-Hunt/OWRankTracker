@@ -24,3 +24,16 @@ Write-Host "Tagging Release";
 git add $tagNotesPath;
 git commit -m "${tag}";
 git tag -a $tag -m "${tag}";
+
+$push = Read-Host -Prompt "Push? [Y/N]"
+switch($push)
+{
+    Y {
+        Write-Host "Pushing release"
+        git push --tags
+    }
+    Default {
+        Write-Host "Not pushing release"
+    }
+}
+
