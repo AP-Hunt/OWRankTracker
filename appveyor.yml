@@ -46,7 +46,7 @@ test:
 # https://www.appveyor.com/docs/build-worker-api/#push-artifact
 after_test:
     - ps: >- 
-        7z a $env:ZIP_ARTIFACT_PATH -r $env:APPVEYOR_BUILD_FOLDER\OWRankTracker\bin\$env:CONFIGURATION\;
+        7z a $env:ZIP_ARTIFACT_PATH -r $env:APPVEYOR_BUILD_FOLDER\OWRankTracker\bin\$env:CONFIGURATION\*;
         Push-AppveyorArtifact $env:ZIP_ARTIFACT_PATH -DeploymentName GitHubArtifacts -FileName $env:ZIP_ARTIFACT_NAME;
         Push-AppveyorArtifact $env:MSI_ARTIFACT_PATH -DeploymentName GitHubArtifacts -FileName $env:MSI_ARTIFACT_NAME;
 
