@@ -1,0 +1,3 @@
+Prompts new users for default profile name
+New application icon
+Introduces installer
