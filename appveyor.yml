@@ -12,13 +12,16 @@ configuration: Release
 before_build:
         - cmd: nuget restore
         - ps: >-
-            # If APPVEYOR_REPO_TAG_NAME is set, this is a tagged release
             if ($env:APPVEYOR_REPO_TAG_NAME -eq "true") {
                 ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
+                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$(configuration)\OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
                 ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.msi";
+                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$(configuration)\OverwatchRankTracker.msi";
             } else {
                 ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.zip";
+                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$(configuration)\OWRankTracker-$env:APPVEYOR_BUILD_VERSION.zip";
                 ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.msi";
+                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$(configuration)\OverwatchRankTracker.msi";
             }
             
 build:
@@ -39,8 +42,9 @@ test:
 # https://www.appveyor.com/docs/build-worker-api/#push-artifact
 after_build:
     - ps: >- 
-        Push-AppveyorArtifact $env:ZIP_ARTIFACT_NAME -DeploymentName GitHubArtifacts
-        Push-AppveyorArtifact $env:MSI_ARTIFACT_NAME -DeploymentName GitHubArtifacts
+        7z a $env:ZIP_ARTIFACT_PATH -r $APPVEYOR_BUILD_FOLDER\OWRankTracker\bin\$(configuration)\
+        Push-AppveyorArtifact $env:ZIP_ARTIFACT_PATH -DeploymentName GitHubArtifacts -FileName $env:ZIP_ARTIFACT_NAME
+        Push-AppveyorArtifact $env:MSI_ARTIFACT_PATH -DeploymentName GitHubArtifacts -FileName $env:MSI_ARTIFACT_NAME
 
 
 before_deploy:
