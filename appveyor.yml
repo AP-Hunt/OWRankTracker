@@ -14,14 +14,14 @@ before_build:
         - ps: >-
             if ($env:APPVEYOR_REPO_TAG_NAME -eq "true") {
                 ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
-                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$(configuration)\OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
+                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$configuration\OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
                 ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.msi";
-                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$(configuration)\OverwatchRankTracker.msi";
+                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$configuration\OverwatchRankTracker.msi";
             } else {
                 ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.zip";
-                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$(configuration)\OWRankTracker-$env:APPVEYOR_BUILD_VERSION.zip";
+                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$configuration\OWRankTracker-$env:APPVEYOR_BUILD_VERSION.zip";
                 ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.msi";
-                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$(configuration)\OverwatchRankTracker.msi";
+                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$configuration\OverwatchRankTracker.msi";
             }
             
 build:
