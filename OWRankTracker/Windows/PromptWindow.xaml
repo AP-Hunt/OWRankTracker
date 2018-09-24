@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OWRankTracker.Windows"
         mc:Ignorable="d"
-        Title="{Binding Title}"
         MinWidth="300"
         SizeToContent="WidthAndHeight"
         d:DataContext="{d:DesignInstance {x:Type local:PromptWindow}, IsDesignTimeCreatable=True}">
