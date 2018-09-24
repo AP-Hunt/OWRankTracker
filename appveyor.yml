@@ -14,15 +14,19 @@ before_build:
         - ps: >-
             if ($env:APPVEYOR_REPO_TAG_NAME -eq "true") {
                 ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
-                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$configuration\OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
+                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$env:CONFIGURATION\OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
                 ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.msi";
-                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$configuration\OverwatchRankTracker.msi";
+                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$env:CONFIGURATION\OverwatchRankTracker.msi";
             } else {
                 ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.zip";
-                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$configuration\OWRankTracker-$env:APPVEYOR_BUILD_VERSION.zip";
+                ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$env:CONFIGURATION\OWRankTracker-$env:APPVEYOR_BUILD_VERSION.zip";
                 ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.msi";
-                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$configuration\OverwatchRankTracker.msi";
+                ${env:MSI_ARTIFACT_PATH} = "OWRankTracker.Installer\bin\$env:CONFIGURATION\OverwatchRankTracker.msi";
             }
+            Write-Host "ZIP_ARTIFACT_NAME: $env:ZIP_ARTIFACT_NAME";
+            Write-Host "ZIP_ARTIFACT_PATH: $env:ZIP_ARTIFACT_PATH";
+            Write-Host "MSI_ARTIFACT_NAME: $env:MSI_ARTIFACT_NAME";
+            Write-Host "MSI_ARTIFACT_PATH: $env:MSI_ARTIFACT_PATH";
             
 build:
     parallel: true
@@ -40,9 +44,9 @@ test:
 # deployment name, used as the artifact name
 # https://www.appveyor.com/docs/packaging-artifacts/#packaging-multiple-files-in-different-locations-into-a-single-archive
 # https://www.appveyor.com/docs/build-worker-api/#push-artifact
-after_build:
+after_test:
     - ps: >- 
-        7z a $env:ZIP_ARTIFACT_PATH -r $APPVEYOR_BUILD_FOLDER\OWRankTracker\bin\$configuration\;
+        7z a $env:ZIP_ARTIFACT_PATH -r $APPVEYOR_BUILD_FOLDER\OWRankTracker\bin\$env:CONFIGURATION\;
         Push-AppveyorArtifact $env:ZIP_ARTIFACT_PATH -DeploymentName GitHubArtifacts -FileName $env:ZIP_ARTIFACT_NAME;
         Push-AppveyorArtifact $env:MSI_ARTIFACT_PATH -DeploymentName GitHubArtifacts -FileName $env:MSI_ARTIFACT_NAME;
 
