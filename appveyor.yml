@@ -12,7 +12,7 @@ configuration: Release
 before_build:
         - cmd: nuget restore
         - ps: >-
-            if ($env:APPVEYOR_REPO_TAG_NAME -eq "true") {
+            if ($env:APPVEYOR_REPO_TAG -eq "true") {
                 ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
                 ${env:ZIP_ARTIFACT_PATH} = "OWRankTracker\bin\$env:CONFIGURATION\OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
                 ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.msi";
