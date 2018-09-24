@@ -32,12 +32,16 @@ test:
             - OWRankTracker.Test\bin\$(configuration)\OWRankTracker.Test.dll
             - OWRankTracker.Core.Test\bin\$(Configuration)\OWRankTracker.Core.Test.dll
 
-artifacts:
-    - path: OWRankTracker\bin\$(configuration)
-      name: $(ZIP_ARTIFACT_NAME)
+# Cannot deploy multiple artifacts to the same GitHub release
+# so need to use scripts to push multiple artifacts to the same
+# deployment name, used as the artifact name
+# https://www.appveyor.com/docs/packaging-artifacts/#packaging-multiple-files-in-different-locations-into-a-single-archive
+# https://www.appveyor.com/docs/build-worker-api/#push-artifact
+after_build:
+    - ps: >- 
+        Push-AppveyorArtifact $env:ZIP_ARTIFACT_NAME -DeploymentName GitHubArtifacts
+        Push-AppveyorArtifact $env:MSI_ARTIFACT_NAME -DeploymentName GitHubArtifacts
 
-    - path:  OWRankTracker.Installer\bin\$(configuration)\OverwatchRankTracker.msi
-      name: $(MSI_ARTIFACT_NAME)
 
 before_deploy:
     - ps: >-
@@ -47,9 +51,7 @@ deploy:
     - provider:  GitHub
       auth_token:
           secure: RM5VRaDPrGHUmXhx2H9fF75MzpjeeCsTiSdDA8geFD3fFWz9JawwezptRY+eeQsX
-      artifact: 
-        - $(ZIP_ARTIFACT_NAME)
-        - $(MSI_ARTIFACT_NAME)
+      artifact: GitHubArtifacts
       description: $(release_description)
       on:
           appveyor_repo_tag: true
