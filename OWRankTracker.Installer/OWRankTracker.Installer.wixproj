@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>c1e1d968-517d-4e6d-8388-e94ac965fbc6</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>OwerwatchRankTracker</OutputName>
+    <OutputName>OverwatchRankTracker</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -47,18 +47,7 @@
 	</Target>
 	-->
   <Target Name="BeforeBuild">
-    <HeatDirectory 
-        OutputFile="$(ProjectDir)InstallationSources.wxs" 
-        Directory="$(SolutionDir)OWRankTracker\$(OutDir)" 
-        DirectoryRefId="INSTALLFOLDER" 
-        ComponentGroupName="ProductFilesComponentGroup" 
-        ToolPath="$(WixToolPath)" 
-        SuppressRegistry="true" 
-        SuppressRootDirectory="true" 
-        SuppressCom="true" 
-        AutogenerateGuids="True" 
-        PreprocessorVariable="var.OWRankTracker.TargetDir" 
-        />
+    <HeatDirectory OutputFile="$(ProjectDir)InstallationSources.wxs" Directory="$(SolutionDir)OWRankTracker\$(OutDir)" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="ProductFilesComponentGroup" ToolPath="$(WixToolPath)" SuppressRegistry="true" SuppressRootDirectory="true" SuppressCom="true" AutogenerateGuids="True" PreprocessorVariable="var.OWRankTracker.TargetDir" />
     <ItemGroup>
       <Compile Include="$(ProjectDir)InstallationSources.wxs" />
     </ItemGroup>

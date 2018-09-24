@@ -11,6 +11,16 @@ assembly_info:
 configuration: Release
 before_build:
         - cmd: nuget restore
+        - ps: >-
+            # If APPVEYOR_REPO_TAG_NAME is set, this is a tagged release
+            if ($env:APPVEYOR_REPO_TAG_NAME -eq "true") {
+                ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.zip";
+                ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-$env:APPVEYOR_REPO_TAG_NAME.msi";
+            } else {
+                ${env:ZIP_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.zip";
+                ${env:MSI_ARTIFACT_NAME} = "OWRankTracker-build-$env:APPVEYOR_BUILD_VERSION.msi";
+            }
+            
 build:
     parallel: true
     project: OWRankTracker.sln
@@ -24,7 +34,10 @@ test:
 
 artifacts:
     - path: OWRankTracker\bin\$(configuration)
-      name: OWRankTracker-$(APPVEYOR_BUILD_VERSION)
+      name: $(ZIP_ARTIFACT_NAME)
+
+    - path:  OWRankTracker.Installer\bin\$(configuration)\OverwatchRankTracker.msi
+      name: $(MSI_ARTIFACT_NAME)
 
 before_deploy:
     - ps: >-
@@ -34,7 +47,9 @@ deploy:
     - provider:  GitHub
       auth_token:
           secure: RM5VRaDPrGHUmXhx2H9fF75MzpjeeCsTiSdDA8geFD3fFWz9JawwezptRY+eeQsX
-      artifact: OWRankTracker-$(APPVEYOR_BUILD_VERSION)
+      artifact: 
+        - $(ZIP_ARTIFACT_NAME)
+        - $(MSI_ARTIFACT_NAME)
       description: $(release_description)
       on:
           appveyor_repo_tag: true
