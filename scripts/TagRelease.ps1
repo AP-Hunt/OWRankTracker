@@ -30,7 +30,7 @@ switch($push)
 {
     Y {
         Write-Host "Pushing release"
-        git push --tags
+        git push --follow-tags
     }
     Default {
         Write-Host "Not pushing release"
