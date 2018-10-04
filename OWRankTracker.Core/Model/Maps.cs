@@ -15,6 +15,7 @@ namespace OWRankTracker.Core.Model
                 return new string[]{
                     "N/A",
                     "Blizzard World",
+                    "Busan",
                     "Château Guillard",
                     "Dorado",
                     "Eichenwalde",
